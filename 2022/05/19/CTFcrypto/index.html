@@ -1,242 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>CTFcrypto | Hexo</title>
-
-  <!-- keywords -->
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="栅栏密码栅栏密码把要加密的明文分成 N 个一组，然后把每组的第 1 个字连起来，形成一段无规律的话。 1明文：THERE IS A CIPHER  去掉空格后变为 1THEREISACIPHER  分成两栏，两个一组得到 1TH ER EI SA CI PH ER  先取出第一个字母，再取出第二个字母 12TEESCPEHRIAIHR  连在一起就是 1TEESCPEHRIAIHR  上述明文也可">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CTFcrypto">
-<meta property="og:url" content="https://zjzh1.github.io/2022/05/19/CTFcrypto/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="栅栏密码栅栏密码把要加密的明文分成 N 个一组，然后把每组的第 1 个字连起来，形成一段无规律的话。 1明文：THERE IS A CIPHER  去掉空格后变为 1THEREISACIPHER  分成两栏，两个一组得到 1TH ER EI SA CI PH ER  先取出第一个字母，再取出第二个字母 12TEESCPEHRIAIHR  连在一起就是 1TEESCPEHRIAIHR  上述明文也可">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://zjzh1.github.io/pic/image-20220520141358420.png">
-<meta property="article:published_time" content="2022-05-19T07:52:26.000Z">
-<meta property="article:modified_time" content="2022-05-20T10:03:25.272Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="ctf">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zjzh1.github.io/pic/image-20220520141358420.png">
-  
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-  
-
-  
-<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-
-  
-<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-
-
-  
-<meta name="generator" content="Hexo 6.2.0"></head>
-<body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
-			
-		</a>
-
-		<hgroup>
-		  <h1 class="header-author"><a href="/"></a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/ctf/" style="font-size: 10px;">ctf</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-			</div>
-		</div>
-	</header>				
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide"></h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author"></h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-      <div class="body-wrap"><article id="post-CTFcrypto" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2022/05/19/CTFcrypto/" class="article-date">
-  	<time datetime="2022-05-19T07:52:26.000Z" itemprop="datePublished">2022-05-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      CTFcrypto
-      
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/" rel="tag">ctf</a></li></ul>
-	</div>
-
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/ctf/">ctf</a>
-	</div>
-
-
-        
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="栅栏密码"><a href="#栅栏密码" class="headerlink" title="栅栏密码"></a>栅栏密码</h1><p>栅栏密码把要加密的明文分成 N 个一组，然后把每组的第 1 个字连起来，形成一段无规律的话。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">明文：THERE IS A CIPHER</span><br></pre></td></tr></table></figure>
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CTFcrypto | Hexo</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: 'confirm'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 6.2.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>CTFcrypto</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2022-05-19T07:52:26.000Z" id="date"> 2022-05-19</time></div></span><br><span>Last Update: <div class="control"><time datetime="2022-11-13T15:59:10.893Z" id="updated"> 2022-11-13</time></div></span></div></div><hr><div id="post-content"><h1 id="栅栏密码"><a href="#栅栏密码" class="headerlink" title="栅栏密码"></a>栅栏密码</h1><p>栅栏密码把要加密的明文分成 N 个一组，然后把每组的第 1 个字连起来，形成一段无规律的话。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">明文：THERE IS A CIPHER<br></code></pre></td></tr></table></figure>
 
 <p>去掉空格后变为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEREISACIPHER</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">THEREISACIPHER<br></code></pre></td></tr></table></figure>
 
 <p>分成两栏，两个一组得到</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TH ER EI SA CI PH ER</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">TH ER EI SA CI PH ER<br></code></pre></td></tr></table></figure>
 
 <p>先取出第一个字母，再取出第二个字母</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TEESCPE</span><br><span class="line">HRIAIHR</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">TEESCPE<br>HRIAIHR<br></code></pre></td></tr></table></figure>
 
 <p>连在一起就是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TEESCPEHRIAIHR</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">TEESCPEHRIAIHR<br></code></pre></td></tr></table></figure>
 
 <p>上述明文也可以分为 2 栏。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEREIS ACIPHER</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">THEREIS ACIPHER<br></code></pre></td></tr></table></figure>
 
 <p>组合得到密文</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TAHCEIRPEHIESR</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">TAHCEIRPEHIESR<br></code></pre></td></tr></table></figure>
 
 <h1 id="摩斯密码"><a href="#摩斯密码" class="headerlink" title="摩斯密码"></a>摩斯密码</h1><h1 id="培根密码"><a href="#培根密码" class="headerlink" title="培根密码"></a>培根密码</h1><p>培根密码使用两种不同的字体，代表 A 和 B，结合加密表进行加解密。</p>
 <table>
@@ -313,19 +132,14 @@
 <li>加密内容会有特殊的字体之分，亦或者大小写之分。</li>
 </ul>
 <h2 id="Base-编码-¶"><a href="#Base-编码-¶" class="headerlink" title="Base 编码 ¶"></a>Base 编码 <a target="_blank" rel="noopener" href="https://ctf-wiki.org/misc/encode/computer/?h=base#base">¶</a></h2><p>base xx 中的 xx 表示的是采用多少个字符进行编码，比如说 base64 就是采用以下 64 个字符编码，由于 2 的 6 次方等于 64，所以每 6 个比特为一个单元，对应某个可打印字符。3 个字节就有 24 个比特，对应于 4 个 Base64 单元，即 3 个字节需要用 4 个可打印字符来表示。它可用来作为电子邮件的传输编码。在 Base64 中的可打印字符包括字母 A-Z、a-z、数字 0-9，这样共有 62 个字符，此外两个可打印符号在不同的系统中而不同。</p>
-
-
-
-
-
-
 <h1 id="JSfuck"><a href="#JSfuck" class="headerlink" title="JSfuck"></a>JSfuck</h1><p>JSFuck是一种基于JavaScript原子部分的深奥和教育性的编程风格。它仅使用六个不同的字符来编写和执行代码。</p>
 <p>它不依赖于浏览器，因此您甚至可以在Node.js上运行它。</p>
-<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">false       =&gt;  ![]</span><br><span class="line">true        =&gt;  !![]</span><br><span class="line">undefined   =&gt;  [][[]]</span><br><span class="line">NaN         =&gt;  +[![]]</span><br><span class="line">0           =&gt;  +[]</span><br><span class="line">1           =&gt;  +!+[]</span><br><span class="line">2           =&gt;  !+[]+!+[]</span><br><span class="line">10          =&gt;  +[[+!+[]]+[+[]]]</span><br><span class="line">Array       =&gt;  []</span><br><span class="line">Number      =&gt;  +[]</span><br><span class="line">String      =&gt;  []+[]</span><br><span class="line">Boolean     =&gt;  ![]</span><br><span class="line">Function    =&gt;  [][&quot;filter&quot;]</span><br><span class="line">run         =&gt;  [][&quot;filter&quot;][&quot;constructor&quot;]( CODE )()</span><br><span class="line">eval        =&gt;  [][&quot;filter&quot;][&quot;constructor&quot;](&quot;return eval&quot;)()( CODE )</span><br><span class="line">window      =&gt;  [][&quot;filter&quot;][&quot;constructor&quot;](&quot;return this&quot;)()</span><br></pre></td></tr></table></figure>
+<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">false       =&gt;  ![]<br>true        =&gt;  !![]<br>undefined   =&gt;  [][[]]<br>NaN         =&gt;  +[![]]<br>0           =&gt;  +[]<br>1           =&gt;  +!+[]<br>2           =&gt;  !+[]+!+[]<br>10          =&gt;  +[[+!+[]]+[+[]]]<br>Array       =&gt;  []<br>Number      =&gt;  +[]<br>String      =&gt;  []+[]<br>Boolean     =&gt;  ![]<br>Function    =&gt;  [][&quot;filter&quot;]<br>run         =&gt;  [][&quot;filter&quot;][&quot;constructor&quot;]( CODE )()<br>eval        =&gt;  [][&quot;filter&quot;][&quot;constructor&quot;](&quot;return eval&quot;)()( CODE )<br>window      =&gt;  [][&quot;filter&quot;][&quot;constructor&quot;](&quot;return this&quot;)()<br></code></pre></td></tr></table></figure>
 
 <p>完整列表：<a target="_blank" rel="noopener" href="https://github.com/aemkei/jsfuck/blob/master/jsfuck.js">jsfuck&#x2F;jsfuck.js at master · aemkei&#x2F;jsfuck · GitHub</a></p>
 <p>可在浏览器控制台运行。</p>
-<h1 id="AAEncode"><a href="#AAEncode" class="headerlink" title="AAEncode"></a>AAEncode</h1><h1 id="Rabbit"><a href="#Rabbit" class="headerlink" title="Rabbit"></a>Rabbit</h1><p><img src="/../pic/image-20220520141358420.png" alt="image-20220520141358420"></p>
+<h1 id="AAEncode"><a href="#AAEncode" class="headerlink" title="AAEncode"></a>AAEncode</h1><p><a target="_blank" rel="noopener" href="http://www.atoolbox.net/Tool.php?Id=703">http://www.atoolbox.net/Tool.php?Id=703</a></p>
+<h1 id="Rabbit"><a href="#Rabbit" class="headerlink" title="Rabbit"></a>Rabbit</h1><p class='item-img' data-src='/../pic/image-20220520141358420.png'><img src="/../pic/image-20220520141358420.png" alt="image-20220520141358420"></p>
 <p><a target="_blank" rel="noopener" href="http://www.jsons.cn/rabbitencrypt/">http://www.jsons.cn/rabbitencrypt/</a></p>
 <h1 id="Ook编码"><a href="#Ook编码" class="headerlink" title="Ook编码"></a>Ook编码</h1><p>[Brainfuck&#x2F;Ook! Obfuscation&#x2F;Encoding <a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook">splitbrain.org]</a></p>
 <h1 id="Brainfuck解释器"><a href="#Brainfuck解释器" class="headerlink" title="Brainfuck解释器"></a>Brainfuck解释器</h1><p>[Brainfuck&#x2F;Ook! Obfuscation&#x2F;Encoding <a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook">splitbrain.org]</a></p>
@@ -336,109 +150,430 @@
 <h1 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h1><p><a target="_blank" rel="noopener" href="https://www.somd5.com/">https://www.somd5.com/</a></p>
 <h2 id="MD5是什么"><a href="#MD5是什么" class="headerlink" title="MD5是什么"></a>MD5是什么</h2><p><strong>MD5信息摘要算法</strong>（英语：MD5 Message-Digest Algorithm），一种被广泛使用的密码散列函数，可以产生出一个128位（16[字节]的散列值（hash value）），用于确保信息传输完整一致。MD5由美国密码学家[罗纳德·李维斯特]（Ronald Linn Rivest）设计，于1992年公开，用以取代[MD4]算法。这套算法的程序在 RFC 1321 标准中被加以规范。1996年后该算法被证实存在弱点，可以被加以破解，对于需要高度安全性的数据，专家一般建议改用其他算法，如[SHA-2]。2004年，证实MD5算法无法防止碰撞，因此不适用于安全性认证，如[SSL]公开密钥认证或是[数字签名]等用途。</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wysngblogs/p/15905398.html">MD5碰撞原理简单介绍及其实现 - wysng - 博客园 (cnblogs.com)</a></p>
+<h1 id="URL解码"><a href="#URL解码" class="headerlink" title="URL解码"></a>URL解码</h1><p><a target="_blank" rel="noopener" href="http://www.urlencode.com.cn/">http://www.urlencode.com.cn/</a></p>
+<h1 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h1><h2 id="RSA算法"><a href="#RSA算法" class="headerlink" title="RSA算法"></a><strong>RSA算法</strong></h2><p>密钥生成的步骤</p>
+<p>我们通过一个例子，来理解RSA算法。假设爱丽丝要与鲍勃进行加密通信，她该怎么生成公钥和私钥呢？</p>
+<p><strong>第一步，随机选择两个不相等的质数p和q。</strong></p>
+<p>爱丽丝选择了61和53。（实际应用中，这两个质数越大，就越难破解。）</p>
+<p><strong>第二步，计算p和q的乘积n。</strong></p>
+<p>爱丽丝就把61和53相乘。</p>
+<blockquote>
+<p>n &#x3D; 61×53 &#x3D; 3233</p>
+</blockquote>
+<p>n的长度就是密钥长度。3233写成二进制是110010100001，一共有12位，所以这个密钥就是12位。实际应用中，RSA密钥一般是1024位，重要场合则为2048位。</p>
+<p><strong>第三步，计算n的欧拉函数φ(n)。</strong></p>
+<blockquote>
+<p>n是质数，则 φ(n)&#x3D;n-1<br>n &#x3D; p1 × p2<br>φ(n) &#x3D; φ(p1p2) &#x3D; φ(p1)φ(p2)<br>&#x3D;&gt; φ(n) &#x3D; (p-1)(q-1)</p>
+</blockquote>
+<p>爱丽丝算出φ(3233)等于60×52，即3120。</p>
+<p><strong>第四步，随机选择一个整数e，条件是1&lt; e &lt; φ(n)，且e与φ(n) 互质。</strong></p>
+<p>爱丽丝就在1到3120之间，随机选择了17。（实际应用中，常常选择65537。）</p>
+<p><strong>第五步，计算e对于φ(n)的模反元素d。</strong></p>
+<p>所谓”模反元素”就是指有一个整数d，可以使得ed被φ(n)除的余数为1。</p>
+<blockquote>
+<p>ed ≡ 1 (mod φ(n))</p>
+</blockquote>
+<p>这个式子等价于</p>
+<blockquote>
+<p>ed - 1 &#x3D; kφ(n)</p>
+</blockquote>
+<p>于是，找到模反元素d，实质上就是对下面这个二元一次方程求解。(-k &#x3D; y)</p>
+<blockquote>
+<p>ex + φ(n)y &#x3D; 1</p>
+</blockquote>
+<p>已知 e&#x3D;17, φ(n)&#x3D;3120，</p>
+<blockquote>
+<p>17x + 3120y &#x3D; 1</p>
+</blockquote>
+<p>这个方程可以用<a href="https://link.zhihu.com/?target=https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95">“扩展欧几里得算法”(又叫辗转相除法)</a>求解，此处省略具体过程。总之，爱丽丝算出一组整数解为 (x,y)&#x3D;(2753,-15)，即 d&#x3D;2753。</p>
+<p>至此所有计算完成。</p>
+<p><strong>第六步，将n和e封装成公钥，n和d封装成私钥。</strong></p>
+<p>在爱丽丝的例子中，n&#x3D;3233，e&#x3D;17，d&#x3D;2753，所以公钥就是 (3233,17)，私钥就是（3233, 2753）。</p>
+<p>实际应用中，公钥和私钥的数据都采用<a href="https://link.zhihu.com/?target=https://zh.wikipedia.org/zh-cn/ASN.1">ASN.1</a>格式表达。</p>
+<h2 id="RSA算法的加密和解密"><a href="#RSA算法的加密和解密" class="headerlink" title="RSA算法的加密和解密"></a><strong>RSA算法的加密和解密</strong></h2><p>有了公钥和密钥，就能进行加密和解密了。</p>
+<p><strong>(1)加密要用公钥(n,e)</strong></p>
+<p>假设鲍勃要向爱丽丝发送加密信息m，他就要用爱丽丝的公钥 (n,e) 对m进行加密。这里需要注意，m必须是整数（字符串可以取ascii值或unicode值），且m必须小于n。</p>
+<p>所谓”加密”，就是算出下式的c：</p>
+<blockquote>
+<p>　me ≡ c (mod n)</p>
+</blockquote>
+<p>爱丽丝的公钥是 (3233, 17)，鲍勃的m假设是65，那么可以算出下面的等式：</p>
+<blockquote>
+<p>65^17 ≡ 2790 (mod 3233)</p>
+</blockquote>
+<p>于是，c等于2790，鲍勃就把2790发给了爱丽丝。</p>
+<p><strong>(2)解密要用私钥(n,d)</strong></p>
+<p>爱丽丝拿到鲍勃发来的2790以后，就用自己的私钥(3233, 2753) 进行解密。可以证明，下面的等式一定成立：</p>
+<blockquote>
+<p>cd ≡ m (mod n)</p>
+</blockquote>
+<p>也就是说，c的d次方除以n的余数为m。现在，c等于2790，私钥是(3233, 2753)，那么，爱丽丝算出</p>
+<blockquote>
+<p>2790^2753 ≡ 65 (mod 3233)</p>
+</blockquote>
+<p>因此，爱丽丝知道了鲍勃加密前的原文就是65。</p>
+<p>至此，”加密–解密”的整个过程全部完成。</p>
+<p><strong>我们可以看到，如果不知道d，就没有办法从c求出m。而前面已经说过，要知道d就必须分解n，这是极难做到的，所以RSA算法保证了通信安全。</strong></p>
+<p>你可能会问，公钥(n,e) 只能加密小于n的整数m，那么如果要加密大于n的整数，该怎么办？有两种解决方法：一种是把长信息分割成若干段短消息，每段分别加密；另一种是先选择一种”对称性加密算法”（比如<a href="https://link.zhihu.com/?target=https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%8A%A0%E5%AF%86%E6%A8%99%E6%BA%96">DES</a>），用这种算法的密钥加密信息，再用RSA公钥加密DES密钥。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gao131360144/article/details/79966094">(71条消息) RSA加密算法_gao131360144的博客-CSDN博客_rsa加密算法</a></p>
+<p>依赖库：</p>
+<ul>
+<li>gmpy2</li>
+<li>pycrypto</li>
+</ul>
+<h2 id="RSA原理"><a href="#RSA原理" class="headerlink" title="RSA原理"></a>RSA原理</h2><p>私钥n,d，公钥n,e。其中n是两个素数p,q的乘积。c为密文，m为明文。φ(n)为欧拉函数。其中:d是e模φ(n)的逆元。我们有φ(n)&#x3D;(p−1)(q−1)</p>
+<p>ed≡1modφ(n)</p>
+<p>encrypt:c≡memodn</p>
+<p>decrypt:m≡cdmodn</p>
+<h2 id="openssl使用"><a href="#openssl使用" class="headerlink" title="openssl使用"></a>openssl使用</h2><p>使用<code>openssl</code>查看<code>pem</code>文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">openssl rsa -pubin -text -modulus -in public.pem<br></code></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/05/20/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
-  
-  
-</nav>
+<p>使用<code>openssl</code>和私钥解密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">openssl rsautl -decrypt -in flag -inkey privatekey -out flag.txt<br></code></pre></td></tr></table></figure>
 
-  
-</article>
+<h2 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>已知p、q、c</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>求φ(n)，再求出d即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from Crypto.Util.number import inverse,long_to_bytes<br>p = <br>q = <br>n = p*q<br>phi = (p-1)*(q-1)<br>e = <br>d = inverse(e,phi)<br>c = <br>m = pow(c,d,n)<br>print(long_to_bytes(m))<br></code></pre></td></tr></table></figure>
 
+<h2 id="模不互素"><a href="#模不互素" class="headerlink" title="模不互素"></a>模不互素</h2><h3 id="场景-1"><a href="#场景-1" class="headerlink" title="场景"></a>场景</h3><p>已知如下：</p>
+<p>n1&#x3D;p×q1</p>
+<p>n2&#x3D;p×q2</p>
+<p>c1&#x3D;memodn1</p>
+<p>c2&#x3D;memodn2</p>
+<h3 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h3><p>求出n1和n2的公因子，即可解得p和q</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from libnum import xgcd<br>from Crypto.Util.number import inverse,long_to_bytes<br>n1 = <br>n2 = <br>c1 = <br>c2 = <br>e = <br>p = xgcd(n1,n2)[2]<br>q1 = n1//p<br>q2 = n2//p<br>phi1=(p-1)*(q1-1)<br>phi2=(p-1)*(q2-1)<br>d1 = inverse(e,phi1)<br>d2 = inverse(e,phi2)<br>m1 = pow(c1,d1,n1)<br>m2 = pow(c2,d2,n2)<br>print(long_to_bytes(m1))<br>print(long_to_bytes(m2))<br></code></pre></td></tr></table></figure>
 
-<div class="ds-share share" data-thread-key="CTFcrypto" data-title="CTFcrypto" data-url="https://zjzh1.github.io/2022/05/19/CTFcrypto/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="CTFcrypto">
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
-    </div>
- </div>
- 
+<h2 id="共模攻击"><a href="#共模攻击" class="headerlink" title="共模攻击"></a>共模攻击</h2><h3 id="场景-2"><a href="#场景-2" class="headerlink" title="场景"></a>场景</h3><p>模数n相同，指数、e1、e2不同且互质</p>
+<p>已知：</p>
+<p>c1&#x3D;me1modn</p>
+<p>c2&#x3D;me2modn</p>
+<h3 id="解法-2"><a href="#解法-2" class="headerlink" title="解法"></a>解法</h3><p>根据扩展欧几里得算法求出re1+se2&#x3D;1modn的整数、r、s</p>
+<p>根据<br>(1)c1rc2s≡mre1mse2modn≡mmodn得到明文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from libnum import xgcd<br>from Crypto.Util.number import inverse,long_to_bytes<br><br>n = <br>c1 = <br>c2 = <br>e1 = <br>e2 = <br>s = xgcd(e1,e2)<br>s1 = s[0]<br>s2 = s[1]<br>if s1 &lt; 0:<br>    s1 = - s1<br>    c1 = inverse(c1, n)<br>elif s2 &lt; 0:<br>    s2 = - s2<br>    c2 = inverse(c2, n)<br><br>m = pow(c1, s1, n)*pow(c2, s2, n) % n print(long_to_bytes(m))<br></code></pre></td></tr></table></figure>
 
+<h2 id="e小指数攻击"><a href="#e小指数攻击" class="headerlink" title="e小指数攻击"></a>e小指数攻击</h2><h3 id="场景-3"><a href="#场景-3" class="headerlink" title="场景"></a>场景</h3><p>当e很小的时候，例如2、3，此时可能可以通过直接暴力开根的方式进行攻击</p>
+<h3 id="解法-3"><a href="#解法-3" class="headerlink" title="解法"></a>解法</h3><p>以e&#x3D;3为例，已知c≡m3modn，因此有：m3&#x3D;c+kN</p>
+<p>m&#x3D;c+kN3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import gmpy2<br>from Crypto.Util.number import long_to_bytes<br>n = <br>e = 3<br>c = <br>i = 0<br>while(True):<br>    a,b = gmpy2.iroot(c+i*n,3)<br>    if(b==1):<br>        print(long_to_bytes(a))<br>        exit(0)<br></code></pre></td></tr></table></figure>
 
+<h2 id="Rabin攻击"><a href="#Rabin攻击" class="headerlink" title="Rabin攻击"></a>Rabin攻击</h2><h3 id="场景-4"><a href="#场景-4" class="headerlink" title="场景"></a>场景</h3><p>当指数e&#x3D;2，且已知p和q</p>
+<h3 id="解法-4"><a href="#解法-4" class="headerlink" title="解法"></a>解法</h3><ul>
+<li><p>计算</p>
+<p>mp&#x3D;c2modp</p>
+<p>mq&#x3D;c2modq</p>
+</li>
+<li><p>扩展欧几里得求yp和yq</p>
+<p>ypp+yqq&#x3D;1</p>
+</li>
+<li><p>解得4个明文</p>
+<p>a&#x3D;(yp⋅p⋅mq+yq⋅q⋅mp)modn</p>
+<p>b&#x3D;n−a</p>
+<p>c&#x3D;(yp⋅p⋅mq−yq⋅q⋅mp)modn</p>
+<p>d&#x3D;n−c</p>
+</li>
+<li><p>条件：当p≡q≡3mod4时，有</p>
+<p>mp&#x3D;c(p+1)&#x2F;4modp</p>
+<p>mq&#x3D;c(q+1)&#x2F;4modq</p>
+</li>
+</ul>
+<h4 id="满足条件时"><a href="#满足条件时" class="headerlink" title="满足条件时"></a>满足条件时</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import gmpy2<br>def rabin_decrypt(c, p, q, e=2):<br>    n = p * q<br>    mp = pow(c, (p + 1) / 4, p)<br>    mq = pow(c, (q + 1) / 4, q)<br>    yp = gmpy2.invert(p, q)<br>    yq = gmpy2.invert(q, p)<br>    r = (yp * p * mq + yq * q * mp) % n<br>    rr = n - r<br>    s = (yp * p * mq - yq * q * mp) % n<br>    ss = n - s<br>    return (r, rr, s, ss)<br></code></pre></td></tr></table></figure>
 
+<h4 id="不满足条件时"><a href="#不满足条件时" class="headerlink" title="不满足条件时"></a>不满足条件时</h4><p>转换为模平方根问题</p>
+<ul>
+<li>用python（代码来自yuri）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import gmpy2<br>import random<br><br>def exgcd(r0, r1):<br>    x0, y0 = 1, 0<br>    x1, y1 = 0, 1<br>    x, y = r0, r1<br>    r = r0 % r1<br>    q = r0 // r1<br>    while r:<br>        x, y = x0 - q * x1, y0 - q * y1<br>        x0, y0 = x1, y1<br>        x1, y1 = x, y<br>        r0 = r1<br>        r1 = r<br>        r = r0 % r1<br>        q = r0 // r1<br>    return x<br><br>def Jacobi(n, m):<br>    n = n % m<br>    if n == 0:<br>        return 0<br>    Jacobi2 = 1<br>    if not (n &amp; 1):<br>        k = (-1) ** (((m**2 - 1) // 8) &amp; 1)<br>        while not (n &amp; 1):<br>            Jacobi2 *= k<br>            n &gt;&gt;= 1<br>    if n == 1:<br>        return Jacobi2<br>    return Jacobi2 * ((-1) ** ((((m - 1) // 2) * ((n - 1) // 2)) &amp; 1)) * Jacobi(m % n, n)<br><br>def CRT(b, m): <br>    M = 1<br>    for i in range(len(b)):<br>        M *= m[i]<br>    ans = 0<br>    for i in range(len(b)):<br>        ans += b[i] * M // m[i] * exgcd(M // m[i], m[i])<br>    return ans % M<br><br>def solve(a, p):<br>    a_1 = gmpy2.invert(a, p)<br>    s = p - 1<br>    t = 0<br>    while s % 2 == 0:<br>        t += 1<br>        s &gt;&gt;= 1<br>    n = 0<br>    while True:<br>        n = random.randint(1, p-1)<br>        if Jacobi(n, p) == -1:<br>            break<br><br>    b = pow(n, s, p)<br>    x_t_1 = pow(a, (s+1)//2, p)<br><br>    assert pow(b, 2**t, p) == 1<br>    assert pow(b, 2**(t-1), p) == p-1<br><br>    x, j, temp = 0, 0, 0<br><br>    for i in range(0, t-1):<br>        x = pow(a_1*(x_t_1**2), 2**(t-2), p)<br>        if x == 1:<br>            j = 0<br>        elif x == p-1:<br>            j = 1<br>        else:<br>            exit(0)<br>        t -= 1<br>        temp = x_t_1<br>        x_t_1 = (x_t_1 * (b**(j**(2**i)))) % p<br>    else: <br>        if x == 1:<br>            return temp, -temp % p<br><br><br>p = <br>q = <br>n = p * q<br>e = 2<br>c = <br><br>a, b = None, None<br>while True:<br>    try:<br>        a = solve(c % p, p)<br>        assert pow(a[0], e, p) == c % p<br>        assert pow(a[1], e, p) == c % p<br>        break<br>    except:<br>        pass<br><br>while True:<br>    try:<br>        b = solve(c % q, q)<br>        assert pow(b[0], e, q) == c % q<br>        assert pow(b[1], e, q) == c % q<br>        break<br>    except:<br>        pass<br><br>print(bytes.fromhex(hex(CRT([a[0],b[0]],[p,q]))[2:]))<br>print(bytes.fromhex(hex(CRT([a[0],b[1]],[p,q]))[2:]))<br>print(bytes.fromhex(hex(CRT([a[1],b[0]],[p,q]))[2:]))<br></code></pre></td></tr></table></figure>
 
+<ul>
+<li>用sage</li>
+</ul>
+<p>使用一句话<code>Mod(c_square, q).sqrt(all=True)</code>分别求出mp和mq，代回去解得可能的明文</p>
+<h2 id="n分解攻击"><a href="#n分解攻击" class="headerlink" title="n分解攻击"></a>n分解攻击</h2><p>当n很小或者满足一定条件时，可以进行暴力分解</p>
+<ul>
+<li>yafu</li>
+<li>factordb</li>
+<li>当d&lt;1&#x2F;3N1&#x2F;4时，通过<strong>Wiener’s attack</strong>能够攻击得到d</li>
+<li>当、p、q十分接近时，可以使用费马分解分解n</li>
+<li>当q较小，即|p−q|较大时，可以爆破q</li>
+<li>当d&lt;N0.292时，通过<strong>Boneh Durfee Method</strong>分解n</li>
+</ul>
+<h2 id="广播攻击"><a href="#广播攻击" class="headerlink" title="广播攻击"></a>广播攻击</h2><h3 id="场景-5"><a href="#场景-5" class="headerlink" title="场景"></a>场景</h3><p>给定了不同的模数ni，但指数e相同</p>
+<p>已知:</p>
+<p>c1&#x3D;memodn1</p>
+<p>c2&#x3D;memodn2</p>
+<p>c3&#x3D;memodn3</p>
+<h3 id="解法-5"><a href="#解法-5" class="headerlink" title="解法"></a>解法</h3><p>使用中国剩余定理进行广播攻击</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from gmpy2 import *<br>from Crypto.Util.number import long_to_bytes<br>def broadcast(n1, n2 ,n3, c1, c2, c3):<br>    n = [n1, n2, n3]<br>    C = [c1, c2, c3]<br>    N = 1<br>    for i in n:<br>        N *= i<br><br>    Ni = []<br>    for i in n:<br>        Ni.append(N / i)<br><br>    T = []<br>    for i in range(3):<br>        T.append(long(invert(Ni[i], n[i])))<br><br>    X = 0<br>    for i in range(3):<br>        X += C[i] * Ni[i] * T[i]<br><br>    m = X % N<br>    return m<br><br>n1 = <br>n2 = <br>n3 = <br>e = <br>c1 = <br>c2 = <br>c3 = <br>result = broadcast(n1,n2,n3,c1,c2,c3)<br>m = iroot(result, e)<br>print(long_to_bytes(result))<br></code></pre></td></tr></table></figure>
 
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2022 John Doe
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
-        </div>
-    </div>
-  </div>
-</footer>
-    </div>
-    
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<blockquote>
+<p>第二部分主要是一些Oracle相关的内容</p>
+</blockquote>
+<p>依赖库：</p>
+<ul>
+<li>gmpy2</li>
+<li>pycrypto</li>
+<li>pwntools</li>
+<li>sage</li>
+</ul>
+<h2 id="选择密文攻击"><a href="#选择密文攻击" class="headerlink" title="选择密文攻击"></a>选择密文攻击</h2><h3 id="场景-6"><a href="#场景-6" class="headerlink" title="场景"></a>场景</h3><p>假设Alice创建密文C&#x3D;Pemodn，并发送给Bob，并且我们有一次选择密文进行解密的机会，此时我们可以拦截C，并通过选择密文攻击，求出P</p>
+<h3 id="解法-6"><a href="#解法-6" class="headerlink" title="解法"></a>解法</h3><ol>
+<li>选择任意一个G(n)内与n互素的X(一般就是2啦)</li>
+<li>计算Y&#x3D;C×Xemodn</li>
+<li>由于选择密文攻击，将Y作为密文我们可以得到Z&#x3D;Ydmodn</li>
+<li>最后由于<br class='item-img' data-src='/../pic/2020-07-11-132819.jpg'><img src="/../pic/2020-07-11-132819.jpg" alt="image-20200711200846750"><br>可以通过逆元求出P</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from pwn import *<br>from gmpy2 import invert<br>from Crypto.Util.number import long_to_bytes<br>p = remote(ip,port)<br>C = <br>n = <br>e = <br>X = 2<br>X_e = pow（X,e,n)<br>p.sendline(str((X_e*c)%n)<br>Z = int(p.recvline())<br>result = (Z*long(invert(X,n)))%n<br>print(long_to_bytes(result))<br></code></pre></td></tr></table></figure>
 
+<h2 id="parity-oracle"><a href="#parity-oracle" class="headerlink" title="parity oracle"></a>parity oracle</h2><h3 id="场景-7"><a href="#场景-7" class="headerlink" title="场景"></a>场景</h3><p>假设存在一个 Oracle，它会对一个给定的密文进行解密，并且会检查解密的明文的奇偶性，并根据奇偶性返回相应的值，比如 1 表示奇数，0 表示偶数。那么给定一个加密后的密文，我们只需要 log(N) 次就可以知道这个密文对应的明文消息</p>
+<h3 id="解法-7"><a href="#解法-7" class="headerlink" title="解法"></a>解法</h3><p>假设C&#x3D;PemodN</p>
+<p>第一次我们发送C×2e&#x3D;(2P)emodN给服务器，服务器会返回2PmodN</p>
+<p>我们知道：</p>
+<ul>
+<li>2P是偶数，因此(2P)e也是偶数</li>
+<li>N是奇数（不考虑存在因子为2时）</li>
+</ul>
+<p>那么：</p>
+<ul>
+<li>服务器返回奇数时，说明2P&gt;N，且减去了奇数个N同时我们又知道P&lt;N，即N&#x2F;2≤P&lt;N</li>
+<li>服务器返回偶数时，说明0≤P&lt;N&#x2F;2</li>
+</ul>
+<p><strong>归纳</strong>：</p>
+<p>假设第i次时，我们有</p>
+<p>xN&#x2F;2i≤P&lt;(x+1)N&#x2F;2i</p>
+<p>在第i+1次时，我们可以得到</p>
+<p>2i+1PmodN&#x3D;2i+1P−kN</p>
+<p>0≤2i+1P−kN&lt;N</p>
+<p>kN&#x2F;2i+1≤P&lt;(k+1)N&#x2F;2i+1</p>
+<p>根据第i次结果我们分子分母同乘2，有</p>
+<p>2xN&#x2F;2i+1≤P&lt;2(x+1)N&#x2F;2i+1</p>
+<p>那么：</p>
+<ul>
+<li>服务器返回奇数，则k 必然是一个奇数，k&#x3D;2y+1， 那么 (2yN+N)&#x2F;2i+1≤P&lt;(2yN+2N)&#x2F;2i+1。与此同时，由于 P 必然存在，所以第 i+1 得到的这个范围和第i 次得到的范围必然存在交集。所以y 必然与x相等。</li>
+<li>服务器返回偶数，则k 必然是一个偶数，k&#x3D;2y，此时 y必然也与 x相等，那么2xN&#x2F;2i+1≤P&lt;(2xN+N)&#x2F;2i+1</li>
+</ul>
+<p>总结：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">lb = 0<br>ub = N<br>if server returns 1<br>    lb = (lb+ub)/2<br>else:<br>    ub = (lb+ub)/2<br>from pwn import *<br>import time,decimal,binascii<br>from Crypto.Util.number import long_to_bytes<br><br>p = remote(ip,port)<br><br>def oracle(c1):<br>    global p<br>    p.sendline(str(c1))<br>    res = int(p.recvuntil(&quot;\n&quot;).strip())<br>    if res == 0: return 0<br>    if res == 1:<br>        return 1<br>    else:<br>        assert (0)<br><br><br>def partial(c, n):<br>    global c_of_2<br>    k = n.bit_length()<br>    decimal.getcontext().prec = k  <br>    lower = decimal.Decimal(0)<br>    upper = decimal.Decimal(n)<br>    for i in range(k):<br>        possible_plaintext = (lower + upper) / 2<br>        flag = oracle(c)<br>        if not flag:<br>            upper = possible_plaintext  <br>        else:<br>            lower = possible_plaintext <br>        c = (c * c_of_2) % n  <br>        print(i,flag,int(upper - lower))<br>    return int(upper) <br>  <br>e = <br>c = <br>n = <br>c_of_2 = pow(2,e,n)<br>m = partial((c * c_of_2) % n, n)<br>print(long_to_bytes(m))<br></code></pre></td></tr></table></figure>
 
+<h2 id="byte-oracle"><a href="#byte-oracle" class="headerlink" title="byte oracle"></a>byte oracle</h2><h3 id="场景-8"><a href="#场景-8" class="headerlink" title="场景"></a>场景</h3><p>假设目前存在一个Oracle，它会对一个给定的密文进行解密，并且会给出明文的最后一个字节。那么给定一个加密后的密文，我们只需要 log256n 次就可以知道这个密文对应的明文消息。</p>
+<h3 id="解法-8"><a href="#解法-8" class="headerlink" title="解法"></a>解法</h3><p>是parity oracle的扩展，此时泄露一个byte，因此我们将原来的发送C×2e改成C×256e即可</p>
+<p>已知</p>
+<p>C&#x3D;PemodN</p>
+<p>第一次我们发送</p>
+<p>C×256e&#x3D;(256P)emodN</p>
+<p>服务器返回256PmodN</p>
+<p>此时有：</p>
+<ul>
+<li>256P为偶数</li>
+<li>N为奇数</li>
+</ul>
+<p>由于P&lt;N,我们有256PmodN&#x3D;256P−kN(k&lt;256)，并且对于不同的，k1，k2,我们有256P−k1n≢256P−k2nmod256</p>
+<p>由于是模256，所以256P−kn≡−knmod256，因此我们首先可以枚举0−255情况下的最后一个字节，并得到映射表</p>
+<p>当服务器返回最后一个字节b，我们就可以通过映射表得到k，即减去了k个N，有kN≤256P≤(k+1)N</p>
+<p><strong>归纳</strong>：</p>
+<p>假设在第i次时，有</p>
+<p>xN&#x2F;256i≤P&lt;(x+1)N&#x2F;256i</p>
+<p>当第i+1次时，发送C∗256(i+1)e，服务器返回</p>
+<p>256i+1PmodN&#x3D;256i+1P−kN</p>
+<p>0≤256i+1P−kN&lt;N</p>
+<p>kN&#x2F;256i+1≤P&lt;256(x+1)N&#x2F;256i+1</p>
+<p>总结：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">lb = 0<br>ub = N<br>k = mab[b]<br>interval = (ub-lb)/256<br>lb = lb + interval * k<br>ub = lb + interval<br>from pwn import *<br>import time<br>import binascii<br>from Crypto.Cipher import AES<br>from Crypto.Util.number import long_to_bytes<br>from gmpy2 import invert<br>p = remote(ip,port)<br>e =<br>c = <br>n = <br>print(&quot;e:&quot;,e)<br>print(&quot;c:&quot;,c)<br>print(&quot;n:&quot;,n)<br>d = &#123;&#125;<br>for k in range(0,256):<br>    d[(-k*n)%256] = k<br>print(d)<br>lb = 0<br>ub = n<br>for i in range(1,256):<br>    m = (c * pow(256,i*e,n)) %n<br>    p.sendline(str(m))<br>    b = int(p.recvline())<br>    k = d[b]<br>    interval = int((ub-lb)/256)<br>    lb = lb + interval * k<br>    ub = lb + interval<br>    print(&quot;ub-lb:&quot;,ub-lb)<br>print(&quot;lb:&quot;,lb)<br>print(&quot;ub:&quot;,ub)<br>i = lb<br># 没控制好边界，所以最后暴力一段<br>while(i&lt;=lb+30000):<br>    m = pow(i,e,n)<br>    if(m==c):<br>        print(&quot;result:&quot;,i)<br>        p.sendline(str(i))<br>        print(p.recvline())<br>        exit(0)<br>    i+=1<br>print(&quot;no result&quot;)<br></code></pre></td></tr></table></figure>
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
+<h2 id="d泄露攻击"><a href="#d泄露攻击" class="headerlink" title="d泄露攻击"></a>d泄露攻击</h2><h3 id="场景-9"><a href="#场景-9" class="headerlink" title="场景"></a>场景</h3><p>题目同时给出了d、e和N</p>
+<h3 id="解法-9"><a href="#解法-9" class="headerlink" title="解法"></a>解法</h3><p>我们知道ed≡1modφ(n)，则存在k，使得</p>
+<p>ed−1&#x3D;kφ(n)</p>
+<p>又有∀a∈Zn∗，满足aed−1≡1modn，令</p>
+<p>ed−1&#x3D;2st</p>
+<p>其中，t是一奇数，可以证明对于至少一半的∀a∈Zn∗，存在一个i∈[1,s]，使得</p>
+<p class='item-img' data-src='/../pic/2020-07-11-132835.jpg'><img src="/../pic/2020-07-11-132835.jpg" alt="image-20200711202601842"></p>
+<p>成立，如果a,i满足上述条件，可以对n进行暴力分解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import fractions,random<br><br>def factor_modulus(n, d, e):<br>    &quot;&quot;&quot;<br>    Efficiently recover non-trivial factors of n<br>    See: Handbook of Applied Cryptography<br>    8.2.2 Security of RSA -&gt; (i) Relation to factoring (p.287)<br>    http://www.cacr.math.uwaterloo.ca/hac/<br>    &quot;&quot;&quot;<br>    t = (e * d - 1)<br>    s = 0<br><br>    while True:<br>        quotient, remainder = divmod(t, 2)<br><br>        if remainder != 0:<br>            break<br><br>        s += 1<br>        t = quotient<br><br>    found = False<br><br>    while not found:<br>        i = 1<br>        a = random.randint(1,n-1)<br><br>        while i &lt;= s and not found:<br>            c1 = pow(a, pow(2, i-1, n) * t, n)<br>            c2 = pow(a, pow(2, i, n) * t, n)<br><br>            found = c1 != 1 and c1 != (-1 % n) and c2 == 1<br><br>            i += 1<br><br>    p = fractions.gcd(c1-1, n)<br>    q = n // p<br><br>    return p, q<br></code></pre></td></tr></table></figure>
 
-<script src="/js/main.js"></script>
+<h2 id="n多因子"><a href="#n多因子" class="headerlink" title="n多因子"></a>n多因子</h2><h3 id="场景-10"><a href="#场景-10" class="headerlink" title="场景"></a>场景</h3><p>当n由多个因子组成时</p>
+<h3 id="解法-10"><a href="#解法-10" class="headerlink" title="解法"></a>解法</h3><p>多个因子时，我们根据欧拉函数求得对应的φ(n)即可</p>
+<p>φ(x)&#x3D;x∏i&#x3D;1n(1−1&#x2F;pi)</p>
+<p>其中pi是x的所有质因数</p>
+<h2 id="选择明文攻击"><a href="#选择明文攻击" class="headerlink" title="选择明文攻击"></a>选择明文攻击</h2><h3 id="场景-11"><a href="#场景-11" class="headerlink" title="场景"></a>场景</h3><p>存在一个加密Oracle，能够返回加密后的密文。求出对应的e和n</p>
+<h3 id="解法-11"><a href="#解法-11" class="headerlink" title="解法"></a>解法</h3><h4 id="求解e"><a href="#求解e" class="headerlink" title="求解e"></a>求解e</h4><p>当e较小时，可以通过sage的bsgs函数求得e</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># sage -python script.py<br>from sage.all import *<br>n = <br>n = Zmod(n)<br>m = <br>m = ZmodN(m)<br>c = <br>c = ZmodN(c)<br>print(bsgs(m,c,(3, 2 ** 40)))<br></code></pre></td></tr></table></figure>
 
+<h4 id="求解n"><a href="#求解n" class="headerlink" title="求解n"></a>求解n</h4><p>分别加密、、、2、4、8、16…</p>
+<p>我们可以得到：</p>
+<p>c2&#x3D;2emodn</p>
+<p>c4&#x3D;4emodn</p>
+<p>c8&#x3D;8emodn</p>
+<p>那么：</p>
+<p>c22≡c4modn</p>
+<p>c23≡c8modn</p>
+<p>所以有：</p>
+<p>c22−c4&#x3D;kn</p>
+<p>c23−c8&#x3D;tn</p>
+<p>最后求得他们的公因子就是n，使用的Oracle数据越多，公因子是n的概率越大</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from pwm import *<br>import libnum<br>p = remote(ip,port)<br><br>p.recvuntil(&quot;m: &quot;)<br>p.sendline(&quot;2&quot;)<br>c2 = int(p.recvline())<br><br>p.recvuntil(&quot;m: &quot;)<br>p.sendline(&quot;4&quot;)<br>c4 = int(p.recvline())<br><br>p.recvuntil(&quot;m: &quot;)<br>p.sendline(&quot;8&quot;)<br>c8 = int(p.recvline())<br><br>p.recvuntil(&quot;m: &quot;)<br>p.sendline(&quot;16&quot;)<br>c16 = int(p.recvline())<br><br>p.recvuntil(&quot;m: &quot;)<br>p.sendline(&quot;32&quot;)<br>c32 = int(p.recvline())<br><br>pn = pow(c2,2)-c4<br>qn = pow(c2,3)-c8<br>rn = pow(c2,4)-c16<br>sn = pow(c2,5)-c32<br><br>l = []<br>n = libnum.xgcd(pn,qn)[2]<br>l.append(n)<br>n = libnum.xgcd(pn,rn)[2]<br>l.append(n)<br>n = libnum.xgcd(pn,sn)[2]<br>l.append(n)<br>n = libnum.xgcd(qn,rn)[2]<br>l.append(n)<br>n = libnum.xgcd(qn,sn)[2]<br>l.append(n)<br>n = libnum.xgcd(rn,sn)[2]<br>l.append(n)<br>n = 0<br>for _ in l:<br>    if(l.count(_)&gt;=3):<br>        n = _<br>if(n==0):<br>    print(&quot;nope&quot;)<br>    exit(0)<br>else:<br>    print(&quot;n:&quot;,n)<br></code></pre></td></tr></table></figure>
 
+<blockquote>
+<p>第三部分是基本的Coppersmith相关内容</p>
+</blockquote>
+<p>依赖库：</p>
+<ul>
+<li>gmpy2</li>
+<li>pycrypto</li>
+<li>pwntools</li>
+<li>sage</li>
+</ul>
+<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>c&#x3D;memodN, 当 |m|&lt;N1&#x2F;e时，我们能很快求得m的值</p>
+<p>当|m|&gt;N1&#x2F;e时，如果已知m的部分信息m0，能不能恢复未知x的值，这就是Corppersmith 要解决的问题</p>
+<p>c&#x3D;(m0+x)emodN</p>
+<h2 id="已知部分明文攻击"><a href="#已知部分明文攻击" class="headerlink" title="已知部分明文攻击"></a>已知部分明文攻击</h2><p><strong>引理1</strong></p>
+<p>假设N是一个未知因子组成的数，且存在一个因子b≥Nβ,0&lt;β≤1,f(x) 是一个一元δ阶多项式，且c≥1，那么可以在O(cδ5log9(N))复杂度内求解下列等式的所有的x0</p>
+<p>f(x)&#x3D;0modb,|x0|≤cNβ2&#x2F;δ</p>
+<h3 id="场景-12"><a href="#场景-12" class="headerlink" title="场景"></a>场景</h3><p>设m&#x3D;m0+x0，其中x0是未知的，那么我们可以列出以下多项式</p>
+<p>f(x)&#x3D;(m0+x)e−cmodN,f(x0)&#x3D;0</p>
+<p>当e和x0很小的时候，Coppersmith就能求出x0的值</p>
+<h3 id="解法-12"><a href="#解法-12" class="headerlink" title="解法"></a>解法</h3><p>在这个场景中，我们知道b&#x3D;N,δ&#x3D;e,β&#x3D;1，设c&#x3D;1，此时|x0|≤cNβ2&#x2F;δ&#x3D;N1&#x2F;e，因此，为了求解x0，我们需要知道原消息m至少<code>(1-1/e)*N.bit_length()</code>比特的信息</p>
+<p>碰到的最常见的是已知明文高位攻击，但其实未知的部分在哪里都可以，只要是连贯的，就能构造对应的f(x)进行求解</p>
+<h4 id="已知明文高位"><a href="#已知明文高位" class="headerlink" title="已知明文高位"></a>已知明文高位</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">e = <br>c = <br>n = <br>kbits = # x的未知bit数目<br>m0 =  #明文的高位信息<br>PR.&lt;x&gt; = PolynomialRing(Zmod(n))<br>f = (m0 + x)^e - c<br>f = f.monic()<br>x0 = f.small_roots(X=2^kbits,beta=1)[0] # 在0 - 2^kbits范围内求解小根，beta为1和上述分析的beta一致，也就是对应factor为N<br>print(x0)<br></code></pre></td></tr></table></figure>
 
+<h4 id="已知明文低位"><a href="#已知明文低位" class="headerlink" title="已知明文低位"></a>已知明文低位</h4><p>将构造的函数改为以下即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">f = ((m0 + ZmodN((pow(2,m0.nbits())))*x)^e) - c<br></code></pre></td></tr></table></figure>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+<blockquote>
+<p>当然,如果是明文的中间部分bit未知，也是相同的去修改对应的多项式f(x)即可，具体题目见<a target="_blank" rel="noopener" href="https://cryptohack.org/challenges/rsa/">https://cryptohack.org/challenges/rsa/</a> 中的Null or Never题目（Coppersmith是该题的一种解法）</p>
+</blockquote>
+<h2 id="已知部分p攻击"><a href="#已知部分p攻击" class="headerlink" title="已知部分p攻击"></a>已知部分p攻击</h2><h3 id="场景-13"><a href="#场景-13" class="headerlink" title="场景"></a>场景</h3><p>已知p&#x3D;p0+x,且|x|&lt;N1&#x2F;4时，也就是知道p的大约一半bits信息时，可以得到对应的x，从而对N进行分解</p>
+<h3 id="解法-13"><a href="#解法-13" class="headerlink" title="解法"></a>解法</h3><p>此时根据p&#x3D;p0+x0我们知道p0&#x3D;x0modp，所以可以列出多项式，f(x)&#x3D;p0−xmodp，f(x0)&#x3D;0modp</p>
+<p>对应到引理中，显然b&#x3D;p，由于在RSA中，和p和q经常为同比特的素数，所以设置，beta&#x3D;0.4，0.3等都可</p>
+<h4 id="已知p高位"><a href="#已知p高位" class="headerlink" title="已知p高位"></a>已知p高位</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">n = <br>p0 = # 已知的p的高位<br>kbits = <br>PR.&lt;x&gt; = PolynomialRing(Zmod(n))<br>f = x + p0<br>f = f.monic()<br>x0 = f.small_roots(X=2^kbits, beta=0.3)[0] # beta=0.3表明存在factor 大于n ^0.3<br>print(x0 + p0)<br></code></pre></td></tr></table></figure>
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
+<h4 id="已知p低位"><a href="#已知p低位" class="headerlink" title="已知p低位"></a>已知p低位</h4><p>同样的，已知p低位或者中间部分未知，修改对应的f(x)的表达式即可，例如已知p低位，则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">ZmodN=Zmod(n)<br>f(x) = x*ZmodN(pow(2,p0.nbits()))+p0<br></code></pre></td></tr></table></figure>
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+<h2 id="部分私钥暴露攻击"><a href="#部分私钥暴露攻击" class="headerlink" title="部分私钥暴露攻击"></a>部分私钥暴露攻击</h2><h3 id="场景-14"><a href="#场景-14" class="headerlink" title="场景"></a>场景</h3><p>当已知私钥的部分bit信息，私钥d&#x3D;d0+x，d0 的bit数目约为d的1&#x2F;4时，可以恢复私钥d</p>
+<h3 id="解法-14"><a href="#解法-14" class="headerlink" title="解法"></a>解法</h3><p>根据论文《An Attack on RSA Given a Small Fraction of the Private Key Bits》</p>
+<p>假设私钥d的bit数目为kbits,且已知的是私钥的低位</p>
+<p>那么我们可以知道d0&#x3D;dmod2kbits</p>
+<p>所以有ed0&#x3D;1+k(N−s+1)mod2kbits,(s&#x3D;p+q)</p>
+<p>所以我们可以通过解ed0x−kx(N−x+1)&#x3D;xmod2kbits 得到可能的smod2kbits的值，继续通过求解p2−sp+N&#x3D;0mod2kbits，就能得到pmod2kbits的值了，进而把问题转换为已知部分p攻击。下面这个日本大哥的脚本是把1、2两步结合起来列式了，所以只求一个方程解出了部分p</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def partial_p(p0, kbits, n):<br>    PR.&lt;x&gt; = PolynomialRing(Zmod(n))<br>    nbits = n.nbits()<br><br>    f = 2^kbits*x + p0<br>    f = f.monic()<br>    roots = f.small_roots(X=2^(nbits//2-kbits), beta=0.3)  # find root &lt; 2^(nbits//2-kbits) with factor &gt;= n^0.3，在实际使用脚本的时候可以自己手动改nbits等参数，理解了原理再看脚本就很清楚明了了<br>    if roots:<br>        x0 = roots[0]<br>        p = gcd(2^kbits*x0 + p0, n)<br>        return ZZ(p)<br><br>def find_p(d0, kbits, e, n):<br>    X = var(&#x27;X&#x27;)<br><br>    for k in xrange(1, e+1):<br>        results = solve_mod([e*d0*X - k*X*(n-X+1) + k*n == X], 2^kbits)<br>        for x in results:<br>            p0 = ZZ(x[0])<br>            p = partial_p(p0, kbits, n)<br>            if p:<br>                return p<br><br><br>if __name__ == &#x27;__main__&#x27;:<br>    n =<br>    e = <br>    d0 = <br>		kbits = # 未知的d的bits数目<br>    p = find_p(d0, kbits, e, n)<br>    print(&quot;found p: %d&quot; % p)<br>    q = n//p<br>    print(inverse_mod(e, (p-1)*(q-1)))<br></code></pre></td></tr></table></figure>
 
+<p>如果将1、2两步分开列式，则修改函数<code>find_p</code>如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def find_p(d0, kbits, e, n):<br>    X = var(&#x27;X&#x27;)<br>    for k in range(1, e+1):<br>        results = solve_mod([e*d0*X - k*X*(n-X+1)== X], 2^kbits)<br>        for x in results:<br>            s = ZZ(x[0])<br>            pvar = var(&#x27;p&#x27;)<br>            p_results = solve_mod([pvar*pvar-s*pvar+n==0],2^kbits)<br>            for p0 in p_results:<br>                p0 = ZZ(p0[0])<br>                p = partial_p(p0, kbits, n)<br>                if p:<br>                    return p<br></code></pre></td></tr></table></figure>
 
-  </div>
-</body>
-</html>
+<p>但是速度上好像慢一些。</p>
+<blockquote>
+<p>同样的已知d高位等也可以进行求解，例如已知d高位，那么第一步解出来的其实是可能的p的低位，所以在解部分p时，修改f &#x3D; (2^kbits)*x + p0即可</p>
+</blockquote>
+<h3 id="例题：2020-天翼杯-hardRSA"><a href="#例题：2020-天翼杯-hardRSA" class="headerlink" title="例题：2020 天翼杯 hardRSA"></a>例题：2020 天翼杯 hardRSA</h3><p>题目脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># chall.py<br># flag&#123;6809781d08e120627e623dcdafe26b8a&#125;<br>p = getPrime(510)<br>q = getPrime(510)<br>r = getPrime(510)<br>e = 7<br>m = bytes_to_long(os.urandom(30) + flag)<br>n = p * q * r<br>d = invert(e, (p - 1) * (q - 1) * (r - 1))<br>c = pow(m, e, n)<br>print(n // p)<br>print(p)<br>print(c)<br>print(hex(d % (1 &lt;&lt; 540)))<br></code></pre></td></tr></table></figure>
+
+<p>从题目看也是<code>Coppersmith partial d</code>的情况，只是这里由于n由、、p、q、r三个素数组成，因此需要我们重新推导同余方程</p>
+<p>已知：kbits&#x3D;540、p、qr、d0的值，d0&#x3D;dmod2kbits</p>
+<p>推导如下：<br>(1)ed0&#x3D;1+k(p−1)(q−1)(r−1) &#x3D;1+k(pq−p−q+1)(r−1) &#x3D;1+k(pqr−pr−qr−1−pq+p+q+r) &#x3D;1+k(N−p(r+q)+s−qr−1) &#x3D;1+k(N−p(r+q)+(r+q)+p−qr−1) &#x3D;1+k(N−ps+s+p−qr−1) &#x3D;1+k(p−1)(qr−s+1)mod2kbits,(s&#x3D;q+r)通过上式可以求得所有的smod2kbits的值，同时我们知道(2)q2−sq+qr&#x3D;0mod2kbits联立公式1×q和公式2×k(p−1)，可以得到公式</p>
+<p>(3)ed0q&#x3D;q+kq(p−1)(qr−s+1)</p>
+<p>(4)k(p−1)qr&#x3D;kq(p−1)(s−q)</p>
+<p>相加得到：</p>
+<p>ed0q+k(p−1)qr&#x3D;q+kq(p−1)(qr−q+1)</p>
+<p>即：</p>
+<p>ed0q+k(p−1)qr−k(p−1)q(qr−q+1)&#x3D;qmod2kbits</p>
+<p>解上述同余方程，即可得到qmod2kbits</p>
+<p>由于kbits&#x3D;540，而q只有510bits，所以解出来的就是可能的q的值，再通过qr过滤即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def find_q(d0, kbits, e, qr, p):<br>    X = var(&#x27;X&#x27;)<br>    for k in range(1, e + 1):<br>        temp = k*(p-1)<br>        results = solve_mod([e*d0*X+temp*qr-temp*X*(qr-X+1)==X], 2 ^ kbits)<br>        for x in results:<br>            q = ZZ(x[0])<br>            if qr % q == 0:<br>                return q<br>    return None<br><br><br>if __name__ == &#x27;__main__&#x27;:<br>    qr = 6857671284539062742975668483013695756136974308830302383869017675211748459038460434623218652374536550644287079851235538790745857383008797698872874798021995947967308637270510423795384863442755166813716746318469915880844736019524077541319597047087620854791342900521099848683663304636436936596021386279685708537<br>    p = 2141698433991046082370939321691850154692026423424010392532982575546199921995522418737105878977898158159119041866620684371362271661642476751663585379591337<br>    c = 4329606906986929520922207896899782825966852252045645553852666134465727605375552409314262439896695961792039946511877813768609658516837096110397826574615865145364406310497152725490038135469839136190625952342503082553246584871237205558902774064100332461452316195663446307120094941991930964324406679011451626126064494215289724959537793057773764253924636259378833228904446486925068109314698993641720938647836132806653451109926428309922461595730642461604303078237048<br>    d0 = 0x8e6f66a517d9c8a610eb65dac5a613e72d47a29beaa5c77a9eb857e0db5d09eadf3a317776fdf27b0d85db0b6677afc8e0683d6dc2b4580281b6e99c3050f649213c37<br>    e = 7<br>    kbits = 540<br>    q = find_q(d0, kbits, e, qr, p)<br>    print(q)<br>    # q = 2505948797318027758820680066583904581437202552654881626817593379353882875609223855015707273771918291251411562855290697544161987271016184806489110771554269<br></code></pre></td></tr></table></figure>
+
+<h2 id="short-padding-attack"><a href="#short-padding-attack" class="headerlink" title="short padding attack"></a>short padding attack</h2><h3 id="场景-15"><a href="#场景-15" class="headerlink" title="场景"></a>场景</h3><p><code>Short padding attack</code>经常和 相关消息攻击结合(<a target="_blank" rel="noopener" href="https://blog.ycdxsb.cn/2decc525.html#more)%E4%BD%BF%E7%94%A8">https://blog.ycdxsb.cn/2decc525.html#more)使用</a></p>
+<p>我们已知c1&#x3D;memodn，c2&#x3D;(m+padding)emodn，但我们不知道具体的<code>padding</code>值是多少</p>
+<h3 id="解法-15"><a href="#解法-15" class="headerlink" title="解法"></a>解法</h3><p>首先通过<code>short padding attack</code> 求出<code>padding</code>的值，然后再使用相关消息攻击求得消息m</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def short_pad_attack(c1, c2, e, n):<br>    PRxy.&lt;x,y&gt; = PolynomialRing(Zmod(n))<br>    PRx.&lt;xn&gt; = PolynomialRing(Zmod(n))<br>    PRZZ.&lt;xz,yz&gt; = PolynomialRing(Zmod(n))<br><br>    g1 = x^e - c1<br>    g2 = (x+y)^e - c2<br><br>    q1 = g1.change_ring(PRZZ)<br>    q2 = g2.change_ring(PRZZ)<br><br>    h = q2.resultant(q1)<br>    h = h.univariate_polynomial()<br>    h = h.change_ring(PRx).subs(y=xn)<br>    h = h.monic()<br><br>    kbits = n.nbits()//(2*e*e)<br>    diff = h.small_roots(X=2^kbits, beta=0.5)[0]  # find root &lt; 2^kbits with factor &gt;= n^0.5<br><br>    return diff<br> <br> <br>def related_message_attack(c1, c2, diff, e, n):<br>    PRx.&lt;x&gt; = PolynomialRing(Zmod(n))<br>    g1 = x^e - c1<br>    g2 = (x+diff)^e - c2<br><br>    def gcd(g1, g2):<br>        while g2:<br>            g1, g2 = g2, g1 % g2<br>        return g1.monic()<br><br>    return -gcd(g1, g2)[0]<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第四部分是相关消息的内容</p>
+</blockquote>
+<p>依赖库：</p>
+<ul>
+<li>gmpy2</li>
+<li>pycrypto</li>
+<li>pwntools</li>
+<li>sage</li>
+</ul>
+<h2 id="线性相关消息"><a href="#线性相关消息" class="headerlink" title="线性相关消息"></a>线性相关消息</h2><h3 id="场景-16"><a href="#场景-16" class="headerlink" title="场景"></a>场景</h3><p>这是相关消息攻击最简单的一种形式，已知，c1&#x3D;m1emodN,c2&#x3D;(am1+b)emodN，m2&#x3D;am1+b</p>
+<h3 id="解法-16"><a href="#解法-16" class="headerlink" title="解法"></a>解法</h3><p>可以看到两次加密的消息m1和m2存在线性关系，当e&#x3D;3时，根据推导(见《Low-Exponent RSA with Related Messages》)，可以得到以下关系</p>
+<p>m1&#x3D;bac2+2a3c1−b3c2−a3c1+2b3，因此可以根据已知的、、、c1、c2、a、b轻松得到消息m1（注意，这里的除法是求逆元的意思）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># python<br>from gmpy2 import invert<br>def getmessage(a, b, c1, c2, n):<br>    b3 = pow(b, 3, n)<br>    a3 = pow(a, 3, n)<br>    part1 = b * (c2 + 2 * c1 * a3 - b3) % n<br>    part2 = a * (c2 - c1 * a3 + 2 * b3) % n<br>    part2 = invert(part2, n)<br>    return part1 * part2 % n<br></code></pre></td></tr></table></figure>
+
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><p>下面是论文中的通用情况，即c1&#x3D;(a1m+b1)emodn，c2&#x3D;(a2m+b2)emodn，不通过前面推公式的方法，只需要通过gcd即可求得对应的消息。由于式子(a1m+b1)e−c1modn和(a2m+b2)e−c2modn都必然存在公共的x−m的根，因此通过gcd求得x−m，即可得到对应的消息m，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># sage<br>def gcd(g1, g2):<br>    while g2:<br>        g1, g2 = g2, g1 % g2<br>    return g1.monic()<br>    <br>n = <br>a1 = <br>b1 = <br>c1 = <br>a2 = <br>b2 = <br>e = 3<br>c2 = PR.&lt;x&gt;= PolynomialRing(Zmod(n))<br>g1 = (a1*x+b1)^e-c1<br>g2 = (a2*x+b2)^e-c2<br>print(-gcd(g1, g2)[0])<br></code></pre></td></tr></table></figure>
+
+<h2 id="多消息相关"><a href="#多消息相关" class="headerlink" title="多消息相关"></a>多消息相关</h2><h3 id="场景-17"><a href="#场景-17" class="headerlink" title="场景"></a>场景</h3><p>假设存在k个消息，它们有关系式P0(x1,x2,…xk)&#x3D;p(x1,x2,…xk)&#x3D;0modN</p>
+<p>并且有Pi(xi)&#x3D;xie−ci&#x3D;0modN，需要求解这k个消息</p>
+<h3 id="解法-17"><a href="#解法-17" class="headerlink" title="解法"></a>解法</h3><p>根据这k+1个等式，我们计算Groebner基Groebner([P0,P1,…Pk])，可以得到结果[x1−m1,…xk−mk]，</p>
+<p>也就求得了所有的k个消息</p>
+<p>以下举例论文中比较特殊的线性相关消息，即P0(x1,x2…xk)&#x3D;x1+x2+…xk−w&#x3D;0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># python<br>from Crypto.Util.number import getPrime, bytes_to_long<br>p = getPrime(512)<br>q = getPrime(512)<br>n = p * q<br>e = 3<br>m1 = bytes_to_long(b&quot;flag&#123;This_is_flag1&#125;&quot;)<br>m2 = bytes_to_long(b&quot;flag&#123;This_is_flag2&#125;&quot;)<br>m3 = m1+m2+10000<br>print(n)<br>print(pow(m1,e,n))<br>print(pow(m2,e,n))<br>print(pow(m3,e,n))<br>&#x27;&#x27;&#x27;<br>108684504406001730978107355065522913091470167674222436489722232508562878942265531378563853986279259519842855383477949581415300994618557266600557629814170912555530200441331549267805294484355321505430150563949802485514426432450612355535035910835277447960752175362457165729276266536456917482476441605301749223673<br>11916677858912595626741303803048763073265062084232819699152039070779448603839943645221450568650559197753804295090892194306963679051905125<br>11916677858912595626741303803048763073265066091036090039985967549263766666260772390533720397506805484501981105835442312723743004564263781<br>95333422871300765013930430424390104586121138764086629711853351243347558333657355599432416841199469970564180649403376333107226365096683496<br>&#x27;&#x27;&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>解的脚本如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># sage<br>e = 3<br>cnt = 3<br>N=108684504406001730978107355065522913091470167674222436489722232508562878942265531378563853986279259519842855383477949581415300994618557266600557629814170912555530200441331549267805294484355321505430150563949802485514426432450612355535035910835277447960752175362457165729276266536456917482476441605301749223673<br>c1=11916677858912595626741303803048763073265062084232819699152039070779448603839943645221450568650559197753804295090892194306963679051905125<br>c2=11916677858912595626741303803048763073265066091036090039985967549263766666260772390533720397506805484501981105835442312723743004564263781<br>c3=95333422871300765013930430424390104586121138764086629711853351243347558333657355599432416841199469970564180649403376333107226365096683496<br>c = [c1,c2,c3]<br>PR = PolynomialRing(Zmod(N), &#x27;x&#x27;, cnt)<br>x = PR.gens()<br>F = []<br>for i in range(cnt):<br>    F.append(pow(x[i],e)-c[i])<br>F.append(x[0]+x[1]-x[2]+10000)<br>I = Ideal(F)<br>G= I.groebner_basis()<br>for b in G[:-1]:<br>    mi = ZZ(-b(0, 0, 0))<br>    print(bytes.fromhex(hex(mi)[2:]))<br>&#x27;&#x27;&#x27;<br>b&#x27;flag&#123;This_is_flag1&#125;&#x27;<br>b&#x27;flag&#123;This_is_flag2&#125;&#x27;<br>&#x27;&#x27;&#x27;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Hastad-攻击"><a href="#Hastad-攻击" class="headerlink" title="Hastad 攻击"></a>Hastad 攻击</h2><h3 id="场景-18"><a href="#场景-18" class="headerlink" title="场景"></a>场景</h3><p>前面的两个相关消息攻击模数都是相同的，而在Hasted广播攻击中则不同</p>
+<p>使用不同但互质的模数n，相同的指数e、加密e个明文得到e个密文，即ci&#x3D;(aix+bi)emodni,i&#x3D;1,2…e</p>
+<h3 id="解法-18"><a href="#解法-18" class="headerlink" title="解法"></a>解法</h3><p>通过这e个式子，我们有e个等式：，(aix+bi)e−ci≡0modni，i&#x3D;1,2…e</p>
+<p>由于这e个式子中，模数都是互质的，那么通过中国剩余定理，我们可以得到，P(x)≡0modM，M&#x3D;∏i&#x3D;1eni，而P(x)又必然存在唯一解，并满足LLL算法约束，因此可以通过<code>sage</code>的<code>small_roots</code>函数解得，以下给出两个写法分别来自<a target="_blank" rel="noopener" href="https://github.com/ValarDragon/CTF-Crypto/blob/master/RSA/hastads.sage%E5%92%8Chttps://xz.aliyun.com/t/6813">https://github.com/ValarDragon/CTF-Crypto/blob/master/RSA/hastads.sage和https://xz.aliyun.com/t/6813</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># sage<br>def linearPaddingHastads1(cArray, nArray, aArray, bArray, e=3, eps=1/8):<br>    &quot;&quot;&quot;<br>    Performs Hastads attack on raw RSA with no padding.<br>    This is for RSA encryptions of the form: cArray[i] = pow(aArray[i]*msg + bArray[i],e,nArray[i])<br>    Where they are all encryptions of the same message.<br>    cArray = Ciphertext Array<br>    nArray = Modulus Array<br>    aArray = Array of &#x27;slopes&#x27; for the linear padding<br>    bArray = Array of &#x27;y-intercepts&#x27; for the linear padding<br>    e = public exponent<br>    &quot;&quot;&quot;<br>    if(len(cArray) == len(nArray) == len(aArray) == len(bArray) == e):<br>        for i in range(e):<br>            cArray[i] = Integer(cArray[i])<br>            nArray[i] = Integer(nArray[i])<br>            aArray[i] = Integer(aArray[i])<br>            bArray[i] = Integer(bArray[i])<br>        TArray = [-1]*e<br>        for i in range(e):<br>            arrayToCRT = [0]*e<br>            arrayToCRT[i] = 1<br>            TArray[i] = crt(arrayToCRT, nArray)<br>        P.&lt;x&gt; = PolynomialRing(Zmod(prod(nArray)))<br>        gArray = [-1]*e<br>        for i in range(e):<br>            gArray[i] = TArray[i]*(pow(aArray[i]*x + bArray[i], e) - cArray[i])<br>        g = sum(gArray)<br>        g = g.monic()<br>        # Use Sage&#x27;s inbuilt coppersmith method<br>        roots = g.small_roots(epsilon=eps)<br>        if(len(roots) == 0):<br>            print(&quot;No Solutions found&quot;)<br>            return -1<br>        return roots[0]<br><br>    else:<br>        print(&quot;CiphertextArray, ModulusArray, and the linear padding arrays need to be of the same length,&quot; +<br>              &quot;and the same size as the public exponent&quot;)<br><br>def linearPaddingHastads2(cArray, nArray, aArray, bArray, e=3, eps=1/8):<br>    cnt = e<br>    PR = PolynomialRing(ZZ, &#x27;x&#x27;)<br>    x = PR.gen()<br>    Fs = []<br>    for i in range(cnt):<br>        f = PR((A[i]*x + B[i])**e - Cs[i])<br>        ff = f.change_ring(Zmod(Ns[i]))<br>        ff = ff.monic()<br>        f = ff.change_ring(ZZ)<br>        Fs.append(f)<br><br>    F = crt(Fs, Ns)<br>    M = reduce(lambda x, y: x * y, Ns)<br>    FF = F.change_ring(Zmod(M))<br>    m = FF.small_roots(epsilon=1/16)<br>    if m:<br>        return m[0]<br>    else:<br>        return None<br></code></pre></td></tr></table></figure>
+
+<h2 id="SMUPE-问题"><a href="#SMUPE-问题" class="headerlink" title="SMUPE 问题"></a>SMUPE 问题</h2><h3 id="场景-19"><a href="#场景-19" class="headerlink" title="场景"></a>场景</h3><p>在经历了模数相同的相关消息攻击，也看过了模数不同的Hastad攻击，但是我们的指数e始终是一致的，SMUPE问题是论文《Solving Systems of Modular Equations in One Variable: How Many RSA-Encrypted Messages Does Eve Need to Know? 》中提出的，不仅模数不同，且指数e也不同，具体如下：</p>
+<p>假如我们有k个式子，ci&#x3D;(aix+bi)eimodni,i&#x3D;1,2…k，此时如何求解未知的消息呢</p>
+<h3 id="解法-19"><a href="#解法-19" class="headerlink" title="解法"></a>解法</h3><p>示例1：以论文中为例，已有4个公钥(e,N)分别为(3,N1),(3,N2),(5,N3),(5,N4)，且有ci&#x3D;(aix+bi)eimodNi,i&#x3D;1,2…4</p>
+<p>由于阶次不同，无法直接进行CRT，因此需要构造得到同阶次的式子进行CRT。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Cs = [...]<br>PKs =  [(3,..), (3,..), (5,..), (5,..)]<br>cnt = 4<br>A = []<br>B = []<br>PR = PolynomialRing(ZZ, &#x27;x&#x27;)<br>x = PR.gen()<br><br>Fs = []<br>for i in range(cnt):<br>    f =  PR( ( A[i]*x + B[i] )**PKs[i][0] - Cs[i] )<br>    ff = f.change_ring( Zmod(PKs[i][1]) )<br>    ff = ff.monic()<br>    f = ff.change_ring(ZZ)<br>    Fs.append(f)<br>F = crt( [ Fs[0]**2, Fs[1]**2, x*Fs[2], x*Fs[3] ], [ PKs[i][1] for i in range(cnt) ] )<br><br>M = reduce( lambda x, y: x * y, [ PKs[i][1] for i in range(cnt) ] )<br>FF = F.change_ring( Zmod(M) )<br>m = FF.small_roots(X=2**760, beta=7./8)[0]<br>print(m)<br></code></pre></td></tr></table></figure>
+
+<p>示例2：</p>
+<p>也是为了更加深入理解这个构造，在此示例中，e分别为2和3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">c1 = <br>c2 = <br>a1 = <br>a2 = <br>b1 = <br>b2 = <br><br>Cs = [c1, c2]<br>A = [a1, a2]<br>B = [b1, b2]<br>cnt = 2<br>PKs = [(2,n1), (3,n2)]<br>PR = PolynomialRing(ZZ, &#x27;x&#x27;)<br>x = PR.gen()<br>Fs = []<br>for i in range(cnt):<br>    f =  PR( ( A[i]*x + B[i] )**PKs[i][0] - Cs[i] )<br>    ff = f.change_ring( Zmod(PKs[i][1]) )<br>    ff = ff.monic()<br>    f = ff.change_ring(ZZ)<br>    Fs.append(f)<br>F = crt( [ Fs[0]*x, Fs[1]], [ PKs[i][1] for i in range(cnt) ] )<br><br>M = reduce( lambda x, y: x * y, [ PKs[i][1] for i in range(cnt) ] )<br>FF = F.change_ring( Zmod(M) )<br>m = FF.small_roots(epsilon=1.0/16)[0]<br>print(m)<br></code></pre></td></tr></table></figure>
+
+<p>PS：<code>small_roots</code>的参数需要根据实际情况进行调整</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Let `N` be the characteristic of the base ring this polynomial<br>  is defined over: ``N = self.base_ring().characteristic()``.<br>  This method returns small roots of this polynomial modulo some<br>  factor `b` of `N` with the constraint that `b &gt;= N^\beta`.<br>  Small in this context means that if `x` is a root of `f`<br>  modulo `b` then `|x| &lt; X`. This `X` is either provided by the<br>  user or the maximum `X` is chosen such that this algorithm<br>  terminates in polynomial time. If `X` is chosen automatically<br>  it is `X = ceil(1/2 N^&#123;\beta^2/\delta - \epsilon&#125;)`.<br>  The algorithm may also return some roots which are larger than `X`.<br>  &#x27;This algorithm&#x27; in this context means Coppersmith&#x27;s algorithm for finding<br>  small roots using the LLL algorithm. The implementation of this algorithm<br>  follows Alexander May&#x27;s PhD thesis referenced below.<br>  INPUT:<br>  - ``X`` -- an absolute bound for the root (default: see above)<br>  - ``beta`` -- compute a root mod `b` where `b` is a factor of `N` and `b<br>    \ge N^\beta`. (Default: 1.0, so `b = N`.)<br>  - ``epsilon`` -- the parameter `\epsilon` described above. (Default: `\beta/8`)<br>  - ``**kwds`` -- passed through to method :meth:`Matrix_integer_dense.LLL()<br></code></pre></td></tr></table></figure>
+
+<h2 id="绕过Miller-Rabin素性测试"><a href="#绕过Miller-Rabin素性测试" class="headerlink" title="绕过Miller-Rabin素性测试"></a>绕过Miller-Rabin素性测试</h2><p>题目要求在<code>2**600</code>到<code>2**900</code>范围内找到一个数，这个数不是质数，但可以通过<code>Miller-Rabin</code>素性测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def generate_basis(n):<br>    basis = [True] * n<br>    for i in range(3, int(n**0.5)+1, 2):<br>        if basis[i]:<br>            basis[i*i::2*i] = [False]*((n-i*i-1)//(2*i)+1)<br>    return [2] + [i for i in range(3, n, 2) if basis[i]]<br><br><br>def miller_rabin(n, b):<br>    &quot;&quot;&quot;<br>    Miller Rabin test testing over all<br>    prime basis &lt; b<br>    &quot;&quot;&quot;<br>    basis = generate_basis(b)<br>    if n == 2 or n == 3:<br>        return True<br><br>    if n % 2 == 0:<br>        return False<br><br>    r, s = 0, n - 1<br>    while s % 2 == 0:<br>        r += 1<br>        s //= 2<br>    for b in basis:<br>        x = pow(b, s, n)<br>        if x == 1 or x == n - 1:<br>            continue<br>        for _ in range(r - 1):<br>            x = pow(x, 2, n)<br>            if x == n - 1:<br>                break<br>        else:<br>            return False<br>    return True<br>  <br>miller_rabin(p,64)<br></code></pre></td></tr></table></figure>
+
+<p>从虽然从参考资料中的论文给出了一些示例，但都不符合题目的限制，不过好在参考资料的<code>appendix A</code>里给了十分完整的示例，可以对着复现和验证</p>
+<p>假设我们的伪素数n&#x3D;p1p2…ph，其中pi是不同的素数，使得n是基a1,a2…at下的伪素数，在本文中，h&#x3D;3</p>
+<p>论文中的方法是先找到一个p1，然后生成pi&#x3D;ki(pi−1)+1，最后合成伪素数n</p>
+<p>找p1的步骤如下</p>
+<h3 id="Step1：求Sa"><a href="#Step1：求Sa" class="headerlink" title="Step1：求Sa"></a>Step1：求Sa</h3><p class='item-img' data-src='/../pic/2020-10-09-123315.png'><img src="/../pic/2020-10-09-123315.png" alt="image-20201009203311692"></p>
+<p>显然对于<code>miller_rabin(p,64)</code>而言，我们的<code>A</code>为64以下的所有质数，求<code>A</code>如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">def generate_basis(n):<br>    basis = [True] * n<br>    for i in range(3, int(n**0.5)+1, 2):<br>        if basis[i]:<br>            basis[i*i::2*i] = [False]*((n-i*i-1)//(2*i)+1)<br>    return [2] + [i for i in range(3, n, 2) if basis[i]]<br><br>A = generate_basis(64)<br>print(&#x27;A:&#x27;, A)<br># [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61]<br></code></pre></td></tr></table></figure>
+
+<p>而我们要求的<code>Sa</code>集合，它要求，对于每个基<code>a</code>，在<code>3~(4*a-1)</code>范围内所有与<code>a</code>的<code>Jacobi</code>结果为<code>-1</code>的数字的集合，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">Sa = &#123;&#125;<br>print(&quot;Sa: &quot;)<br>for a in A:<br>    Sa[a] = []<br>    for _ in range(3, 4*a-1, 2):<br>        if libnum.jacobi(a, _) == -1:<br>            Sa[a].append(_)<br>    print(a, Sa[a])<br>&#x27;&#x27;&#x27;<br>Sa:<br>2 [3, 5]<br>3 [5, 7]<br>5 [3, 7, 13, 17]<br>7 [5, 11, 13, 15, 17, 23]<br>11 [3, 13, 15, 17, 21, 23, 27, 29, 31, 41]<br>13 [5, 7, 11, 15, 19, 21, 31, 33, 37, 41, 45, 47]<br>17 [3, 5, 7, 11, 23, 27, 29, 31, 37, 39, 41, 45, 57, 61, 63, 65]<br>19 [7, 11, 13, 21, 23, 29, 33, 35, 37, 39, 41, 43, 47, 53, 55, 63, 65, 69]<br>23 [3, 5, 17, 21, 27, 31, 33, 35, 37, 39, 45, 47, 53, 55, 57, 59, 61, 65, 71, 75, 87, 89]<br>29 [3, 11, 15, 17, 19, 21, 27, 31, 37, 39, 41, 43, 47, 55, 61, 69, 73, 75, 77, 79, 85, 89, 95, 97, 99, 101, 105, 113]<br>31 [7, 13, 17, 19, 21, 29, 35, 37, 39, 47, 51, 53, 57, 59, 61, 63, 65, 67, 71, 73, 77, 85, 87, 89, 95, 103, 105, 107, 111, 117]<br>37 [5, 13, 15, 17, 19, 23, 29, 31, 35, 39, 43, 45, 51, 55, 57, 59, 61, 69, 79, 87, 89, 91, 93, 97, 103, 105, 109, 113, 117, 119, 125, 129, 131, 133, 135, 143]<br>41 [3, 7, 11, 13, 15, 17, 19, 27, 29, 35, 47, 53, 55, 63, 65, 67, 69, 71, 75, 79, 85, 89, 93, 95, 97, 99, 101, 109, 111, 117, 129, 135, 137, 145, 147, 149, 151, 153, 157, 161]<br>43 [5, 11, 15, 23, 29, 31, 33, 35, 37, 45, 47, 59, 61, 65, 67, 69, 73, 77, 79, 83, 85, 87, 89, 93, 95, 99, 103, 105, 107, 111, 113, 125, 127, 135, 137, 139, 141, 143, 149, 157, 161, 167]<br>47 [3, 5, 7, 13, 27, 29, 33, 41, 45, 51, 55, 57, 59, 63, 69, 71, 73, 75, 77, 79, 83, 85, 93, 95, 103, 105, 109, 111, 113, 115, 117, 119, 125, 129, 131, 133, 137, 143, 147, 155, 159, 161, 175, 181, 183, 185]<br>53 [3, 5, 19, 21, 23, 27, 31, 33, 35, 39, 41, 45, 51, 55, 61, 65, 67, 71, 73, 75, 79, 83, 85, 87, 101, 103, 109, 111, 125, 127, 129, 133, 137, 139, 141, 145, 147, 151, 157, 161, 167, 171, 173, 177, 179, 181, 185, 189, 191, 193, 207, 209]<br>59 [3, 7, 13, 15, 19, 27, 33, 35, 37, 51, 61, 63, 65, 69, 71, 73, 75, 77, 79, 87, 89, 93, 95, 97, 101, 107, 109, 113, 117, 119, 123, 127, 129, 135, 139, 141, 143, 147, 149, 157, 159, 161, 163, 165, 167, 171, 173, 175, 185, 199, 201, 203, 209, 217, 221, 223, 229, 233]<br>61 [7, 11, 17, 21, 23, 29, 31, 33, 35, 37, 43, 51, 53, 55, 59, 63, 67, 69, 71, 79, 85, 87, 89, 91, 93, 99, 101, 105, 111, 115, 129, 133, 139, 143, 145, 151, 153, 155, 157, 159, 165, 173, 175, 177, 181, 185, 189, 191, 193, 201, 207, 209, 211, 213, 215, 221, 223, 227, 233, 237]<br>&#x27;&#x27;&#x27;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Step2：求Sb"><a href="#Step2：求Sb" class="headerlink" title="Step2：求Sb"></a>Step2：求Sb</h3><p class='item-img' data-src='/../pic/2020-10-09-124919.png'><img src="/../pic/2020-10-09-124919.png" alt="image-20201009204918929"></p>
+<p>在求<code>Sb</code>前，我们需要先指定ki的值(只要是质数就行)，这里我们指定、k2&#x3D;701、k3&#x3D;257</p>
+<p>我们可以看到<code>Sb</code>其实就是取了一个ki−1(Sa+ki−1)的交集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">print(&quot;Sb:&quot;)<br>Sb = &#123;&#125;<br>for a in A:<br>    result = []<br>    for b in Sa[a]:<br>        if((k2*(b-1)+1) % (4*a) in Sa[a] and (k3*(b-1)+1) % (4*a) in Sa[a]):<br>            result.append(b)<br>        Sb[a]=result<br>    print(a,Sb[a])<br>&#x27;&#x27;&#x27;<br>Sb:<br>2 [3, 5]<br>3 [7]<br>5 [7, 17]<br>7 [11, 13, 15]<br>11 [17, 23, 41]<br>13 [21, 47]<br>17 [29, 63]<br>19 [29, 39, 47, 55]<br>23 [5, 31, 47, 59, 61]<br>29 [21, 41, 55, 79, 99, 113]<br>31 [17, 19, 37, 39, 63, 95]<br>37 [13, 17, 19, 23, 29, 31, 45, 61, 69, 87, 91, 93, 97, 103, 105, 119, 135, 143]<br>41 [17, 35, 63, 67, 69, 99, 117, 145, 149, 151]<br>43 [31, 33, 35, 37, 47, 61, 85, 87, 89, 105, 143]<br>47 [41, 45, 59, 69, 71, 79, 95, 103, 147, 161, 181]<br>53 [27, 61, 65, 67, 75, 83, 85, 87, 133, 167, 171, 173, 181, 189, 191, 193]<br>59 [33, 51, 69, 79, 95, 97, 113, 119, 127, 141, 157, 159, 165, 185]<br>61 [7, 17, 23, 55, 59, 69, 105, 111, 129, 139, 145, 177, 181, 191, 227, 233]<br>&#x27;&#x27;&#x27;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Step3-：CRT求p1"><a href="#Step3-：CRT求p1" class="headerlink" title="Step3 ：CRT求p1"></a>Step3 ：CRT求p1</h3><p class='item-img' data-src='/../pic/2020-10-09-125951.png'><img src="/../pic/2020-10-09-125951.png" alt="image-20201009205950893"></p>
+<p>最后从每个基的<code>Sb</code>集合中选择一个，进行<code>CRT</code>求出p1</p>
+<blockquote>
+<p>由于是随机选取，所以CRT未必满足条件，因此要多次random选出能成功CRT的序列</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">p1 = - inverse(k3, k2) % k2<br>p2 = - inverse(k2, k3) % k3<br>print(p1, p2)<br>print(isPrime(k2), isPrime(k3))<br>for i in range(0, 100000):<br>    try:<br>        crt_A = []<br>        crt_B = []<br>        for a in A:<br>            crt_A.append(random.choice(Sb[a]))<br>            crt_B.append(4*a)<br>        crt_A.append(p1)<br>        crt_A.append(p2)<br>        crt_B.append(k2)<br>        crt_B.append(k3)<br>        print(crt(crt_A, crt_B))<br>        print(crt_A)<br>        print(crt_B)<br>        break<br>    except:<br>        continue<br><br>p1 = crt(crt_A, crt_B)<br></code></pre></td></tr></table></figure>
+
+<p>然后求一下<code>p1</code>的模数，根据pi&#x3D;ki(p1−1)+1求出其余的数，稍微调整一下大小到<code>600bits-900bits</code>之间即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">d = &#123;&#125;<br>for n in crt_B:<br>    k = factorize(n)<br>    for key in k.keys():<br>        if(key in d.keys()):<br>            if(d[key] &lt; k[key]):<br>                d[key] = k[key]<br>        else:<br>            d[key] = k[key]<br>mod_number = 1<br>for key in d.keys():<br>    mod_number *= pow(key, d[key])<br>print(&#x27;mod:&#x27;, mod_number)<br>for _ in range(100000):<br>    if(_ % 10000 == 0):<br>        print(_)<br>    p1 = p1+mod_number*_*pow(2,100)<br>    p2 = k2*(p1-1)+1<br>    p3 = k3*(p1-1)+1<br>    if(isPrime(p1) and isPrime(p2) and isPrime(p3)):<br>        n = p1*p2*p3<br>        if(miller_rabin(n, 64)):<br>            print(p1, p2, p3)<br>            print(n)<br>            print(miller_rabin(n, 64))<br>            break<br></code></pre></td></tr></table></figure>
+
+<h3 id="完整exp"><a href="#完整exp" class="headerlink" title="完整exp"></a>完整exp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"># https://eprint.iacr.org/2018/749.pdf<br>import libnum<br>from libnum.factorize import factorize<br>from sage.all import *<br>import random<br>from Crypto.Util.number import inverse, isPrime<br><br>def generate_basis(n):<br>    basis = [True] * n<br>    for i in range(3, int(n**0.5)+1, 2):<br>        if basis[i]:<br>            basis[i*i::2*i] = [False]*((n-i*i-1)//(2*i)+1)<br>    return [2] + [i for i in range(3, n, 2) if basis[i]]<br><br><br>def miller_rabin(n, b):<br>    &quot;&quot;&quot;<br>    Miller Rabin test testing over all<br>    prime basis &lt; b<br>    &quot;&quot;&quot;<br>    basis = generate_basis(b)<br>    if n == 2 or n == 3:<br>        return True<br><br>    if n % 2 == 0:<br>        return False<br><br>    r, s = 0, n - 1<br>    while s % 2 == 0:<br>        r += 1<br>        s //= 2<br>    for b in basis:<br>        x = pow(b, s, n)<br>        if x == 1 or x == n - 1:<br>            continue<br>        for _ in range(r - 1):<br>            x = pow(x, 2, n)<br>            if x == n - 1:<br>                break<br>        else:<br>            return False<br>    return True<br><br><br>A = generate_basis(64)<br>print(&#x27;A:&#x27;, A)<br>Sa = &#123;&#125;<br>print(&quot;Sa: &quot;)<br>for a in A:<br>    Sa[a] = []<br>    for _ in range(3, 4*a-1, 2):<br>        if libnum.jacobi(a, _) == -1:<br>            Sa[a].append(_)<br>    print(a, Sa[a])<br><br>k2 = 701<br>k3 = 257<br><br>print(&quot;Sb:&quot;)<br>Sb = &#123;&#125;<br>for a in A:<br>    result = []<br>    for b in Sa[a]:<br>        if((k2*(b-1)+1) % (4*a) in Sa[a] and (k3*(b-1)+1) % (4*a) in Sa[a]):<br>            result.append(b)<br>        Sb[a]=result<br>    print(a,Sb[a])<br>p1 = - inverse(k3, k2) % k2<br>p2 = - inverse(k2, k3) % k3<br>print(p1, p2)<br>print(isPrime(k2), isPrime(k3))<br>for i in range(0, 100000):<br>    try:<br>        crt_A = []<br>        crt_B = []<br>        for a in A:<br>            crt_A.append(random.choice(Sb[a]))<br>            crt_B.append(4*a)<br>        crt_A.append(p1)<br>        crt_A.append(p2)<br>        crt_B.append(k2)<br>        crt_B.append(k3)<br>        print(crt(crt_A, crt_B))<br>        print(crt_A)<br>        print(crt_B)<br>        break<br>    except:<br>        continue<br><br>p1 = crt(crt_A, crt_B)<br>d = &#123;&#125;<br>for n in crt_B:<br>    k = factorize(n)<br>    for key in k.keys():<br>        if(key in d.keys()):<br>            if(d[key] &lt; k[key]):<br>                d[key] = k[key]<br>        else:<br>            d[key] = k[key]<br>mod_number = 1<br>for key in d.keys():<br>    mod_number *= pow(key, d[key])<br>print(&#x27;mod:&#x27;, mod_number)<br>for _ in range(100000):<br>    if(_ % 10000 == 0):<br>        print(_)<br>    p1 = p1+mod_number*_*pow(2,100)<br>    p2 = k2*(p1-1)+1<br>    p3 = k3*(p1-1)+1<br>    if(isPrime(p1) and isPrime(p2) and isPrime(p3)):<br>        n = p1*p2*p3<br>        if(miller_rabin(n, 64)):<br>            print(p1, p2, p3)<br>            print(n)<br>            print(miller_rabin(n, 64))<br>            break<br><br>&#x27;&#x27;&#x27;<br>A: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61]<br>Sa:<br>2 [3, 5]<br>3 [5, 7]<br>5 [3, 7, 13, 17]<br>7 [5, 11, 13, 15, 17, 23]<br>11 [3, 13, 15, 17, 21, 23, 27, 29, 31, 41]<br>13 [5, 7, 11, 15, 19, 21, 31, 33, 37, 41, 45, 47]<br>17 [3, 5, 7, 11, 23, 27, 29, 31, 37, 39, 41, 45, 57, 61, 63, 65]<br>19 [7, 11, 13, 21, 23, 29, 33, 35, 37, 39, 41, 43, 47, 53, 55, 63, 65, 69]<br>23 [3, 5, 17, 21, 27, 31, 33, 35, 37, 39, 45, 47, 53, 55, 57, 59, 61, 65, 71, 75, 87, 89]<br>29 [3, 11, 15, 17, 19, 21, 27, 31, 37, 39, 41, 43, 47, 55, 61, 69, 73, 75, 77, 79, 85, 89, 95, 97, 99, 101, 105, 113]<br>31 [7, 13, 17, 19, 21, 29, 35, 37, 39, 47, 51, 53, 57, 59, 61, 63, 65, 67, 71, 73, 77, 85, 87, 89, 95, 103, 105, 107, 111, 117]<br>37 [5, 13, 15, 17, 19, 23, 29, 31, 35, 39, 43, 45, 51, 55, 57, 59, 61, 69, 79, 87, 89, 91, 93, 97, 103, 105, 109, 113, 117, 119, 125, 129, 131, 133, 135, 143]<br>41 [3, 7, 11, 13, 15, 17, 19, 27, 29, 35, 47, 53, 55, 63, 65, 67, 69, 71, 75, 79, 85, 89, 93, 95, 97, 99, 101, 109, 111, 117, 129, 135, 137, 145, 147, 149, 151, 153, 157, 161]<br>43 [5, 11, 15, 23, 29, 31, 33, 35, 37, 45, 47, 59, 61, 65, 67, 69, 73, 77, 79, 83, 85, 87, 89, 93, 95, 99, 103, 105, 107, 111, 113, 125, 127, 135, 137, 139, 141, 143, 149, 157, 161, 167]<br>47 [3, 5, 7, 13, 27, 29, 33, 41, 45, 51, 55, 57, 59, 63, 69, 71, 73, 75, 77, 79, 83, 85, 93, 95, 103, 105, 109, 111, 113, 115, 117, 119, 125, 129, 131, 133, 137, 143, 147, 155, 159, 161, 175, 181, 183, 185]<br>53 [3, 5, 19, 21, 23, 27, 31, 33, 35, 39, 41, 45, 51, 55, 61, 65, 67, 71, 73, 75, 79, 83, 85, 87, 101, 103, 109, 111, 125, 127, 129, 133, 137, 139, 141, 145, 147, 151, 157, 161, 167, 171, 173, 177, 179, 181, 185, 189, 191, 193, 207, 209]<br>59 [3, 7, 13, 15, 19, 27, 33, 35, 37, 51, 61, 63, 65, 69, 71, 73, 75, 77, 79, 87, 89, 93, 95, 97, 101, 107, 109, 113, 117, 119, 123, 127, 129, 135, 139, 141, 143, 147, 149, 157, 159, 161, 163, 165, 167, 171, 173, 175, 185, 199, 201, 203, 209, 217, 221, 223, 229, 233]<br>61 [7, 11, 17, 21, 23, 29, 31, 33, 35, 37, 43, 51, 53, 55, 59, 63, 67, 69, 71, 79, 85, 87, 89, 91, 93, 99, 101, 105, 111, 115, 129, 133, 139, 143, 145, 151, 153, 155, 157, 159, 165, 173, 175, 177, 181, 185, 189, 191, 193, 201, 207, 209, 211, 213, 215, 221, 223, 227, 233, 237]<br>Sb:<br>2 [3, 5]<br>3 [7]<br>5 [7, 17]<br>7 [11, 13, 15]<br>11 [17, 23, 41]<br>13 [21, 47]<br>17 [29, 63]<br>19 [29, 39, 47, 55]<br>23 [5, 31, 47, 59, 61]<br>29 [21, 41, 55, 79, 99, 113]<br>31 [17, 19, 37, 39, 63, 95]<br>37 [13, 17, 19, 23, 29, 31, 45, 61, 69, 87, 91, 93, 97, 103, 105, 119, 135, 143]<br>41 [17, 35, 63, 67, 69, 99, 117, 145, 149, 151]<br>43 [31, 33, 35, 37, 47, 61, 85, 87, 89, 105, 143]<br>47 [41, 45, 59, 69, 71, 79, 95, 103, 147, 161, 181]<br>53 [27, 61, 65, 67, 75, 83, 85, 87, 133, 167, 171, 173, 181, 189, 191, 193]<br>59 [33, 51, 69, 79, 95, 97, 113, 119, 127, 141, 157, 159, 165, 185]<br>61 [7, 17, 23, 55, 59, 69, 105, 111, 129, 139, 145, 177, 181, 191, 227, 233]<br>30 246<br>1 1<br>61933256682223994457337248907<br>[3, 7, 7, 11, 23, 47, 63, 39, 31, 79, 39, 103, 151, 31, 59, 87, 127, 111, 30, 246]<br>[8, 12, 20, 28, 44, 52, 68, 76, 92, 116, 124, 148, 164, 172, 188, 212, 236, 244, 701, 257]<br>mod: 84521291682266726685731893560<br>0<br>434373326067214608775878317645775351280862168574601991542247144587 304495701573117440751890700669688521247884380170795996071115248354787 111633944799274154455400727634964265279181577323672711826357516158603<br>14765242572717201537350357000818561932573315288396435774266341361498670863676541981221739664014401028330587564384701242669740856196369695370339038363927740181650866851457768843113763288312682772243647307<br>True<br>&#x27;&#x27;&#x27;<br></code></pre></td></tr></table></figure>
+
+<h2 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h2><h3 id="费马分解"><a href="#费马分解" class="headerlink" title="费马分解"></a>费马分解</h3><p class='item-img' data-src='/../pic/image-20221101114309032.png'><img src="/../pic/image-20221101114309032.png" alt="image-20221101114309032"></p>
+<p class='item-img' data-src='/../pic/image-20221101114329560.png'><img src="/../pic/image-20221101114329560.png" alt="image-20221101114329560"></p>
+<h1 id="Rabin加密"><a href="#Rabin加密" class="headerlink" title="Rabin加密"></a>Rabin加密</h1><p>Rabin 密码系统是第一个非对称密码系统，由<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Michael_O._Rabin">Michael Oser Rabin</a>于1979年在论文*<a target="_blank" rel="noopener" href="http://publications.csail.mit.edu/lcs/pubs/pdf/MIT-LCS-TR-212.pdf">Digitalized Signatures and Public-Key Functions as Intractable as Factorization</a>*中发表。可以证明从密文中恢复明文与分解一样困难，它的安全性来源于大整数的因子分解。优点：</p>
+<ol>
+<li>Rabin 函数的每个输出都可以由四个可能的输入中的任何一个生成</li>
+<li>如果每个输出都是密文，则解密时需要额外的复杂性来识别四个可能的输入中的哪一个是真正的明文</li>
+</ol>
+<p class='item-img' data-src='/../pic/image-20220524231559461.png'><img src="/../pic/image-20220524231559461.png" alt="image-20220524231559461"></p>
+<p class='item-img' data-src='/../pic/image-20220524231606916.png'><img src="/../pic/image-20220524231606916.png" alt="image-20220524231606916"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ookami6497/article/details/123319233?ops_request_misc=%7B%22request_id%22:%22165340643316781483723583%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=165340643316781483723583&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-123319233-null-null.142%5Ev10%5Econtrol,157%5Ev12%5Enew_style1&utm_term=%E7%9C%9F%C2%B7%E7%AE%80%E5%8D%95%C2%B7%E4%B8%8D%E5%8D%B7%C2%B7%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E7%AD%BE%E5%88%B0&spm=1018.2226.3001.4187">(71条消息) CTFshow-卷网杯-crypto-真·简单·不卷·现代密码签到（复现）_这就是强者的世界么的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53283643/article/details/123423241?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-2-123423241-blog-123553316.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-2-123423241-blog-123553316.pc_relevant_default&utm_relevant_index=5">(71条消息) 卷王杯-部分Crypto-wp_mxx307的博客-CSDN博客</a></p>
+<h1 id="kali工具"><a href="#kali工具" class="headerlink" title="kali工具"></a>kali工具</h1><h2 id="readelf-："><a href="#readelf-：" class="headerlink" title="readelf ："></a>readelf ：</h2><p>查看elf信息</p>
+<h2 id="objdump："><a href="#objdump：" class="headerlink" title="objdump："></a>objdump：</h2><p>查看elf反汇编信息</p>
+<p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/article/c692b4047e2a70.html">带你认识Linux中的ELF文件 | w3c笔记 (w3cschool.cn)</a></p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2022/05/20/hello-world/">← Next Hello World</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2022/05/18/hvv/">hvv Prev →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="To Catalog">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">John Doe</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%85%E6%A0%8F%E5%AF%86%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">栅栏密码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%91%A9%E6%96%AF%E5%AF%86%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">摩斯密码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%B9%E6%A0%B9%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">培根密码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Base-%E7%BC%96%E7%A0%81-%C2%B6"><span class="toc-number">3.1.</span> <span class="toc-text">Base 编码 </span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JSfuck"><span class="toc-number">4.</span> <span class="toc-text">JSfuck</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC"><span class="toc-number">4.0.1.</span> <span class="toc-text">基本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AAEncode"><span class="toc-number">5.</span> <span class="toc-text">AAEncode</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Rabbit"><span class="toc-number">6.</span> <span class="toc-text">Rabbit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ook%E7%BC%96%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">Ook编码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Brainfuck%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">Brainfuck解释器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Serpent%E5%8A%A0%E5%AF%86"><span class="toc-number">9.</span> <span class="toc-text">Serpent加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Quoted-printable%E7%BC%96%E7%A0%81"><span class="toc-number">10.</span> <span class="toc-text">Quoted-printable编码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MD5%E7%A2%B0%E6%92%9E"><span class="toc-number">11.</span> <span class="toc-text">MD5碰撞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MD5%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">11.1.</span> <span class="toc-text">MD5是什么</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URL%E8%A7%A3%E7%A0%81"><span class="toc-number">12.</span> <span class="toc-text">URL解码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RSA"><span class="toc-number">13.</span> <span class="toc-text">RSA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RSA%E7%AE%97%E6%B3%95"><span class="toc-number">13.1.</span> <span class="toc-text">RSA算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSA%E7%AE%97%E6%B3%95%E7%9A%84%E5%8A%A0%E5%AF%86%E5%92%8C%E8%A7%A3%E5%AF%86"><span class="toc-number">13.2.</span> <span class="toc-text">RSA算法的加密和解密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSA%E5%8E%9F%E7%90%86"><span class="toc-number">13.3.</span> <span class="toc-text">RSA原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openssl%E4%BD%BF%E7%94%A8"><span class="toc-number">13.4.</span> <span class="toc-text">openssl使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84"><span class="toc-number">13.5.</span> <span class="toc-text">常规</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF"><span class="toc-number">13.5.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95"><span class="toc-number">13.5.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E4%B8%8D%E4%BA%92%E7%B4%A0"><span class="toc-number">13.6.</span> <span class="toc-text">模不互素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-1"><span class="toc-number">13.6.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-1"><span class="toc-number">13.6.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB"><span class="toc-number">13.7.</span> <span class="toc-text">共模攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-2"><span class="toc-number">13.7.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-2"><span class="toc-number">13.7.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#e%E5%B0%8F%E6%8C%87%E6%95%B0%E6%94%BB%E5%87%BB"><span class="toc-number">13.8.</span> <span class="toc-text">e小指数攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-3"><span class="toc-number">13.8.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-3"><span class="toc-number">13.8.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rabin%E6%94%BB%E5%87%BB"><span class="toc-number">13.9.</span> <span class="toc-text">Rabin攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-4"><span class="toc-number">13.9.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-4"><span class="toc-number">13.9.2.</span> <span class="toc-text">解法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%A1%E8%B6%B3%E6%9D%A1%E4%BB%B6%E6%97%B6"><span class="toc-number">13.9.2.1.</span> <span class="toc-text">满足条件时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E6%BB%A1%E8%B6%B3%E6%9D%A1%E4%BB%B6%E6%97%B6"><span class="toc-number">13.9.2.2.</span> <span class="toc-text">不满足条件时</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#n%E5%88%86%E8%A7%A3%E6%94%BB%E5%87%BB"><span class="toc-number">13.10.</span> <span class="toc-text">n分解攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E6%94%BB%E5%87%BB"><span class="toc-number">13.11.</span> <span class="toc-text">广播攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-5"><span class="toc-number">13.11.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-5"><span class="toc-number">13.11.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">13.12.</span> <span class="toc-text">选择密文攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-6"><span class="toc-number">13.12.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-6"><span class="toc-number">13.12.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#parity-oracle"><span class="toc-number">13.13.</span> <span class="toc-text">parity oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-7"><span class="toc-number">13.13.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-7"><span class="toc-number">13.13.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#byte-oracle"><span class="toc-number">13.14.</span> <span class="toc-text">byte oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-8"><span class="toc-number">13.14.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-8"><span class="toc-number">13.14.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d%E6%B3%84%E9%9C%B2%E6%94%BB%E5%87%BB"><span class="toc-number">13.15.</span> <span class="toc-text">d泄露攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-9"><span class="toc-number">13.15.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-9"><span class="toc-number">13.15.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#n%E5%A4%9A%E5%9B%A0%E5%AD%90"><span class="toc-number">13.16.</span> <span class="toc-text">n多因子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-10"><span class="toc-number">13.16.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-10"><span class="toc-number">13.16.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">13.17.</span> <span class="toc-text">选择明文攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-11"><span class="toc-number">13.17.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-11"><span class="toc-number">13.17.2.</span> <span class="toc-text">解法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3e"><span class="toc-number">13.17.2.1.</span> <span class="toc-text">求解e</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3n"><span class="toc-number">13.17.2.2.</span> <span class="toc-text">求解n</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%AD%90"><span class="toc-number">13.18.</span> <span class="toc-text">引子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%83%A8%E5%88%86%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="toc-number">13.19.</span> <span class="toc-text">已知部分明文攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-12"><span class="toc-number">13.19.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-12"><span class="toc-number">13.19.2.</span> <span class="toc-text">解法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E6%98%8E%E6%96%87%E9%AB%98%E4%BD%8D"><span class="toc-number">13.19.2.1.</span> <span class="toc-text">已知明文高位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E6%98%8E%E6%96%87%E4%BD%8E%E4%BD%8D"><span class="toc-number">13.19.2.2.</span> <span class="toc-text">已知明文低位</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%83%A8%E5%88%86p%E6%94%BB%E5%87%BB"><span class="toc-number">13.20.</span> <span class="toc-text">已知部分p攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-13"><span class="toc-number">13.20.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-13"><span class="toc-number">13.20.2.</span> <span class="toc-text">解法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5p%E9%AB%98%E4%BD%8D"><span class="toc-number">13.20.2.1.</span> <span class="toc-text">已知p高位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5p%E4%BD%8E%E4%BD%8D"><span class="toc-number">13.20.2.2.</span> <span class="toc-text">已知p低位</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E7%A7%81%E9%92%A5%E6%9A%B4%E9%9C%B2%E6%94%BB%E5%87%BB"><span class="toc-number">13.21.</span> <span class="toc-text">部分私钥暴露攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-14"><span class="toc-number">13.21.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-14"><span class="toc-number">13.21.2.</span> <span class="toc-text">解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A2020-%E5%A4%A9%E7%BF%BC%E6%9D%AF-hardRSA"><span class="toc-number">13.21.3.</span> <span class="toc-text">例题：2020 天翼杯 hardRSA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#short-padding-attack"><span class="toc-number">13.22.</span> <span class="toc-text">short padding attack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-15"><span class="toc-number">13.22.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-15"><span class="toc-number">13.22.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%B6%88%E6%81%AF"><span class="toc-number">13.23.</span> <span class="toc-text">线性相关消息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-16"><span class="toc-number">13.23.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-16"><span class="toc-number">13.23.2.</span> <span class="toc-text">解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">13.23.3.</span> <span class="toc-text">进阶</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%B6%88%E6%81%AF%E7%9B%B8%E5%85%B3"><span class="toc-number">13.24.</span> <span class="toc-text">多消息相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-17"><span class="toc-number">13.24.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-17"><span class="toc-number">13.24.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hastad-%E6%94%BB%E5%87%BB"><span class="toc-number">13.25.</span> <span class="toc-text">Hastad 攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-18"><span class="toc-number">13.25.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-18"><span class="toc-number">13.25.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMUPE-%E9%97%AE%E9%A2%98"><span class="toc-number">13.26.</span> <span class="toc-text">SMUPE 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-19"><span class="toc-number">13.26.1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%B3%95-19"><span class="toc-number">13.26.2.</span> <span class="toc-text">解法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%95%E8%BF%87Miller-Rabin%E7%B4%A0%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">13.27.</span> <span class="toc-text">绕过Miller-Rabin素性测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step1%EF%BC%9A%E6%B1%82Sa"><span class="toc-number">13.27.1.</span> <span class="toc-text">Step1：求Sa</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step2%EF%BC%9A%E6%B1%82Sb"><span class="toc-number">13.27.2.</span> <span class="toc-text">Step2：求Sb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step3-%EF%BC%9ACRT%E6%B1%82p1"><span class="toc-number">13.27.3.</span> <span class="toc-text">Step3 ：CRT求p1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4exp"><span class="toc-number">13.27.4.</span> <span class="toc-text">完整exp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3"><span class="toc-number">13.28.</span> <span class="toc-text">相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%B9%E9%A9%AC%E5%88%86%E8%A7%A3"><span class="toc-number">13.28.1.</span> <span class="toc-text">费马分解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Rabin%E5%8A%A0%E5%AF%86"><span class="toc-number">14.</span> <span class="toc-text">Rabin加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#kali%E5%B7%A5%E5%85%B7"><span class="toc-number">15.</span> <span class="toc-text">kali工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#readelf-%EF%BC%9A"><span class="toc-number">15.1.</span> <span class="toc-text">readelf ：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#objdump%EF%BC%9A"><span class="toc-number">15.2.</span> <span class="toc-text">objdump：</span></a></li></ol></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
